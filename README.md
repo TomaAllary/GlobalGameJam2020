@@ -1,2 +1,2 @@
-# GlobalGameJam2020
-Unity project for the GGJ 2020
+# GlobalGameJam2021
+Unity project for the GGJ 2021
