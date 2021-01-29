@@ -45,6 +45,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
+        
+
+    }
+
+    private void FixedUpdate()
+    {
         if (isActive)
         {
 
@@ -53,27 +59,30 @@ public class PlayerMovement : MonoBehaviour
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");
 
-            if (horizontalInput != 0 || verticalInput != 0) {
+            if (horizontalInput != 0 || verticalInput != 0)
+            {
                 direction = (horizontalInput * Vector3.right + verticalInput * Vector3.forward).normalized;
                 transform.LookAt(transform.position + direction);
 
 
                 //Bound timmy to camera view range
                 bool TimmyCanGo = true;
-                if (gameObject.name == "Timmy") {
-                    Vector3 viewPos = cam.WorldToViewportPoint(transform.position + direction * Time.deltaTime * speed);
+                if (gameObject.name == "Timmy")
+                {
+                    Vector3 viewPos = cam.WorldToViewportPoint(transform.position + direction * Time.fixedDeltaTime * speed);
 
-                    if (viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1) {
+                    if (viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1)
+                    {
                         TimmyCanGo = false;
                     }
 
                 }
-                if(TimmyCanGo)
-                    rb.MovePosition(transform.position + direction * Time.deltaTime * speed);
+                if (TimmyCanGo)
+                    rb.MovePosition(transform.position + direction * Time.fixedDeltaTime * speed);
             }
 
 
-            
+
 
             //limit of map -> should be walls
             if (transform.position.x < -xRange)
@@ -105,11 +114,9 @@ public class PlayerMovement : MonoBehaviour
             diff.Normalize();
 
             transform.LookAt(transform.position + diff);
-            rb.MovePosition(transform.position + diff * Time.deltaTime * speed);
+            rb.MovePosition(transform.position + diff * Time.fixedDeltaTime * speed);
         }
-
     }
-
     public void activeToggle()
     {
         isActive = !isActive;

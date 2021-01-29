@@ -10,6 +10,9 @@ public class ChildMovement : MonoBehaviour
     public int paces;
     private int current;
     private int direction;
+    private bool returningToParent;
+
+    public GameObject parent;
 
     // Start is called before the first frame update
     void Start()
@@ -18,13 +21,16 @@ public class ChildMovement : MonoBehaviour
         paces = Random.Range(30, 150);
         direction = Random.Range(0, 360);
         transform.Rotate(new Vector3(0, direction, 0));
-
+      
+        parent = findClosestKaren();
+        returningToParent = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+        //if((parent.transform.position - transform.position).sqrMagnitude < 100)
         transform.Translate(transform.forward * Time.deltaTime * speed);
         current++;
 
@@ -60,5 +66,23 @@ public class ChildMovement : MonoBehaviour
             }
 
         
+    }
+
+    GameObject findClosestKaren()
+    {
+        GameObject[] allKarens = GameObject.FindGameObjectsWithTag("Mother");
+        float distance = Mathf.Infinity;
+        GameObject closestKaren = null;
+        foreach(var k in allKarens)
+        {
+            float currentDistance = (k.transform.position - transform.position).sqrMagnitude;
+            if(currentDistance < distance)
+            {
+                closestKaren = k;
+                distance = currentDistance;
+            }
+        }
+
+        return closestKaren;
     }
 }
