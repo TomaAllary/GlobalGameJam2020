@@ -1882,6 +1882,11 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 4187713306194647546}
+    - target: {fileID: 1102600009223424523, guid: dcb8f431638129445ab159b61e2f96ae,
+        type: 3}
+      propertyPath: speed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1102600009223424524, guid: dcb8f431638129445ab159b61e2f96ae,
         type: 3}
       propertyPath: scoreText
@@ -1944,13 +1949,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4187713306194647546}
-  m_LocalRotation: {x: 0.53729963, y: 0, z: 0, w: 0.8433915}
-  m_LocalPosition: {x: -6.442299, y: 17.09, z: -10}
+  m_LocalRotation: {x: 0.36742625, y: -0, z: -0, w: 0.9300527}
+  m_LocalPosition: {x: -6.442299, y: 14.09, z: -13.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 65, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 43.114002, y: 0, z: 0}
 --- !u!1 &4187713306194647546
 GameObject:
   m_ObjectHideFlags: 0
