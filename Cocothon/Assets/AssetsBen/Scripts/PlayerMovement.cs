@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float zRange = 100.00f;
 
     public bool isActive;
-    public bool TimmyisActive;
+    public bool timmyReadyForLaunch;
 
     private GameObject timmy;
     private GameObject karen;
@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 direction;
     private Rigidbody rb;
+
     
     // Start is called before the first frame update
     void Start()
@@ -28,14 +29,22 @@ public class PlayerMovement : MonoBehaviour
         timmy = GameObject.Find("Timmy");
         karen = GameObject.Find("Karen");
         rb = this.GetComponent<Rigidbody>();
-        TimmyisActive = true;
 
-
+        timmyReadyForLaunch = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if((timmy.transform.position - karen.transform.position).magnitude < 6) {
+            timmyReadyForLaunch = true;
+        }
+        else {
+            timmyReadyForLaunch = false;
+        }
+
+
         if (isActive)
         {
 
@@ -88,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        else if (gameObject.name == "Timmy" && ((karen.transform.position - transform.position).magnitude > 10))
+        else if (gameObject.name == "Timmy" && ((karen.transform.position - transform.position).magnitude > 5))
         {
             Vector3 diff = karen.transform.position - transform.position;
             //ignore y diff

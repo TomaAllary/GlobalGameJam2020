@@ -11,10 +11,12 @@ public class ActivePlayerManager : MonoBehaviour
     public GameObject cam;
 
     private Vector3 camOffset;
+    private bool timmyLaunched;
 
     void Start()
     {
-
+        timmyLaunched = false;
+        
         if (timmy.gameObject.GetComponent<PlayerMovement>().isActive)
             camOffset = cam.transform.position - timmy.transform.position;
         else
@@ -27,7 +29,16 @@ public class ActivePlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && timmy.GetComponent<PlayerMovement>().timmyReadyForLaunch) {
+            timmyLaunched = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse0)) {
+            timmyLaunched = false;
+
+        }
+
+        if (Input.GetKey(KeyCode.Mouse0) && timmyLaunched)
         {
             timmy.gameObject.GetComponent<PlayerMovement>().isActive = true;
             karen.gameObject.GetComponent<PlayerMovement>().isActive = false;
