@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float horizontalInput;
     public float verticalInput;
-    public float speed = 20.00f;
+    public float speed = 400.00f;
     public float xRange = 100.00f;
     public float zRange = 100.00f;
 
@@ -37,12 +37,13 @@ public class PlayerMovement : MonoBehaviour
             verticalInput = Input.GetAxisRaw("Vertical");
 
 
-            if (horizontalInput != 0 || verticalInput != 0) {
+            //if (horizontalInput != 0 || verticalInput != 0) {
                 direction = (horizontalInput * Vector3.right + verticalInput * Vector3.forward).normalized;
                 transform.LookAt(transform.position + direction);
 
-                rb.MovePosition(transform.position + direction * Time.deltaTime * speed);
-            }
+                //rb.MovePosition(transform.position + direction * Time.deltaTime * speed);
+                rb.velocity = direction * Time.deltaTime * speed;
+            //}
 
 
             //limit of map -> should be walls
@@ -76,7 +77,8 @@ public class PlayerMovement : MonoBehaviour
             diff.Normalize();
 
             transform.LookAt(transform.position + diff);
-            rb.MovePosition(transform.position + diff * Time.deltaTime * speed);
+            //rb.MovePosition(transform.position + diff * Time.deltaTime * speed);
+            rb.velocity = diff * Time.deltaTime * speed;
         }
 
         else if (gameObject.name == "Timmy" && ((karen.transform.position - transform.position).magnitude > 10))
@@ -87,7 +89,9 @@ public class PlayerMovement : MonoBehaviour
             diff.Normalize();
 
             transform.LookAt(transform.position + diff);
-            rb.MovePosition(transform.position + diff * Time.deltaTime * speed);
+            //rb.MovePosition(transform.position + diff * Time.deltaTime * speed);
+            rb.velocity = diff * Time.deltaTime * speed;
+
         }
 
     }
