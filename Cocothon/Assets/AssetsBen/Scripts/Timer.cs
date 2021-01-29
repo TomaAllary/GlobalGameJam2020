@@ -12,6 +12,7 @@ public class Timer : MonoBehaviour
     void Start()
     {
         timerIsRunning = true;
+        timer.color = new Color32(255,255, 255,255);
     }
 
     // Update is called once per frame
@@ -28,6 +29,7 @@ public class Timer : MonoBehaviour
             {
                 timeRemainig = 0;
                 timerIsRunning = false;
+                DisplayTimer();
             }
         }
     }
@@ -36,6 +38,13 @@ public class Timer : MonoBehaviour
     {
         float minutes = Mathf.FloorToInt(timeRemainig / 60);
         float seconds = Mathf.FloorToInt(timeRemainig % 60);
-        timer.text = "Time Left: " + minutes + ":" + seconds;
+        if(minutes == 0 && seconds <= 20)
+            timer.color = new Color32(255, 0, 0, 255);            
+        if (minutes == 0 && seconds == 0)
+            timer.text = "Time Left: 0:00";
+        else if (minutes == 0 && seconds < 10)
+            timer.text = "Time Left: 0:0" + seconds;
+        else
+            timer.text = "Time Left: " + minutes + ":" + seconds;
     }
 }
