@@ -14,12 +14,16 @@ public class PlayerMovement : MonoBehaviour
     public bool isActive;
     public GameObject timmy;
     public GameObject karen;
+
+    private Vector3 direction;
+    private Rigidbody rb;
     
     // Start is called before the first frame update
     void Start()
     {
         timmy = GameObject.Find("Timmy");
         karen = GameObject.Find("Karen");
+        rb = this.GetComponent<Rigidbody>();
       
     }
 
@@ -28,17 +32,20 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isActive)
         {
-            horizontalInput = Input.GetAxis("Horizontal");
-            verticalInput = Input.GetAxis("Vertical");
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+            verticalInput = Input.GetAxisRaw("Vertical");
 
-         
-            
-            var oldPosition = transform.position;
-            
-            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+
+            if (horizontalInput != 0 || verticalInput != 0) {
+                direction = (horizontalInput * Vector3.right + verticalInput * Vector3.forward).normalized;
+                transform.LookAt(transform.position + direction);
+
+
+                //var oldPosition = transform.position;
+
+                rb.MovePosition(transform.position + direction * Time.deltaTime * speed);
+            }
       
-            transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed);
-            
             
              //This is for the active character rotation.. It kinda works, the character turns when you press left or right instead of straffing, but it's WAYYYY too sensitive..
             /*
@@ -48,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
             Quaternion LookAtRotationOnly_Y = Quaternion.Euler(transform.rotation.eulerAngles.x, LookAtRotation.eulerAngles.y, transform.rotation.eulerAngles.z);
             transform.rotation = LookAtRotationOnly_Y;
             */
+
 
 
             if (transform.position.x < -xRange)

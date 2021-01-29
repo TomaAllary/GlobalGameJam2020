@@ -10,8 +10,16 @@ public class ActivePlayerManager : MonoBehaviour
     public GameObject karen;
     public GameObject cam;
 
+    private Vector3 camOffset;
+
     void Start()
     {
+
+        if (timmy.gameObject.GetComponent<PlayerMovement>().isActive)
+            camOffset = cam.transform.position - timmy.transform.position;
+        else
+            camOffset = cam.transform.position - karen.transform.position;
+
         timmy = GameObject.Find("Timmy");
         karen = GameObject.Find("Karen");
     }
@@ -24,9 +32,9 @@ public class ActivePlayerManager : MonoBehaviour
             timmy.gameObject.GetComponent<PlayerMovement>().activeToggle();
             karen.gameObject.GetComponent<PlayerMovement>().activeToggle();
         }
-        if (timmy.gameObject.GetComponent<PlayerMovement>().isActive) 
-            cam.transform.position = new Vector3(timmy.transform.position.x, timmy.transform.position.y + 17, timmy.transform.position.z-10);
+        if (timmy.gameObject.GetComponent<PlayerMovement>().isActive)
+            cam.transform.position = timmy.transform.position + camOffset;
         else
-            cam.transform.position = new Vector3(karen.transform.position.x, karen.transform.position.y + 17, karen.transform.position.z-10);
+            cam.transform.position = karen.transform.position + camOffset;
     }
 }
