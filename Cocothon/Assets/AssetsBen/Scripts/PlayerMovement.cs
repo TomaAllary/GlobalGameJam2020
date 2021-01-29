@@ -46,28 +46,5 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
         }
-
-        /*cam.transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
-        cam.transform.Translate(Vector3.up * verticalInput * Time.deltaTime * speed);
-
-        if (cam.transform.position.x < -xRange)
-        {
-            cam.transform.position = new Vector3(-xRange, 18, transform.position.z);
-        }
-
-        if (cam.transform.position.x > xRange)
-        {
-            cam.transform.position = new Vector3(xRange, 18, transform.position.z);
-        }
-
-        if (cam.transform.position.z < -zRange)
-        {
-            cam.transform.position = new Vector3(transform.position.x, 18, -zRange);
-        }
-
-        if (cam.transform.position.z > zRange)
-        {
-            cam.transform.position = new Vector3(transform.position.x, 18, zRange);
-        }*/
     }
 }

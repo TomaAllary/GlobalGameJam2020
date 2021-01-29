@@ -16,39 +16,26 @@ public class ChildMovement : MonoBehaviour
     {
         current = 0;
         paces = Random.Range(30, 150);
-        direction = Random.Range(0, 4);
+        direction = Random.Range(0, 360);
+        transform.Rotate(new Vector3(0, direction, 0));
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        
-        switch (direction)
-        {
-            case (0):
-                transform.Translate(Vector3.right * 1 * Time.deltaTime * speed);
-                current++;
-                break;
-            case (1):
-                transform.Translate(Vector3.left * 1 * Time.deltaTime * speed);
-                current++;
-                break;
-            case (2):
-                transform.Translate(Vector3.forward * 1 * Time.deltaTime * speed);
-                current++;
-                break;
-            case (3):
-                transform.Translate(Vector3.back * 1 * Time.deltaTime * speed);
-                current++;
-                break;
+        transform.Translate(transform.forward * Time.deltaTime * speed);
+        current++;
 
-        }
+
         if (current == paces)
         {
             current = 0;
             paces = Random.Range(150, 1000);
-            direction = Random.Range(0, 4);
+            direction = Random.Range(0, 360);
+
+            transform.Rotate(new Vector3(0, direction, 0));
         }
 
 
