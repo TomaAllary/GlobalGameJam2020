@@ -8,6 +8,8 @@ public class SpawnManager : MonoBehaviour
     private float spawnRange = 100;
     public GameObject egg;
     public GameObject child;
+    public GameObject timmy;
+    public GameObject karen;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,14 @@ public class SpawnManager : MonoBehaviour
             Instantiate(child);
             child.transform.position = spawnPos;
         }
+
+      
+        //Instantiate(karen);
+        //karen.transform.position = new Vector3(3, 3, 3);
+
+        timmy.gameObject.GetComponent<PlayerMovement>().isActive = true;
+        karen.gameObject.GetComponent<PlayerMovement>().isActive = false;
+        
     }
 
     // Update is called once per frame

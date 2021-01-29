@@ -7,13 +7,16 @@ using UnityEngine;
 public class TimmyCollision : MonoBehaviour
 {
 
+    
     public TextMeshProUGUI scoreText;
     public int eggsInStock;
+
 
     // Start is called before the first frame update
     void Start()
     {
         eggsInStock = 0;
+       
     }
 
     // Update is called once per frame
