@@ -12,8 +12,9 @@ public class PlayerMovement : MonoBehaviour
     public float zRange = 100.00f;
 
     public bool isActive;
-    public GameObject timmy;
-    public GameObject karen;
+
+    private GameObject timmy;
+    private GameObject karen;
 
     private Vector3 direction;
     private Rigidbody rb;
