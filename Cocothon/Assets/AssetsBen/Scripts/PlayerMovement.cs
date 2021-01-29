@@ -31,8 +31,24 @@ public class PlayerMovement : MonoBehaviour
             horizontalInput = Input.GetAxis("Horizontal");
             verticalInput = Input.GetAxis("Vertical");
 
+         
+            
+            var oldPosition = transform.position;
+            
             transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+      
             transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed);
+            
+            
+             //This is for the active character rotation.. It kinda works, the character turns when you press left or right instead of straffing, but it's WAYYYY too sensitive..
+            /*
+            var newPosition = transform.position;
+            var headingDirection = newPosition - oldPosition;
+            Quaternion LookAtRotation = Quaternion.LookRotation(headingDirection);
+            Quaternion LookAtRotationOnly_Y = Quaternion.Euler(transform.rotation.eulerAngles.x, LookAtRotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+            transform.rotation = LookAtRotationOnly_Y;
+            */
+
 
             if (transform.position.x < -xRange)
             {
@@ -59,13 +75,13 @@ public class PlayerMovement : MonoBehaviour
         else if(gameObject.name == "Karen" &&  ((timmy.transform.position - transform.position).magnitude > 10))
         {           
             transform.position = Vector3.Lerp(transform.position, timmy.transform.position - new Vector3(10*(Math.Sign(transform.position.x - timmy.transform.position.x)),0,10 * (Math.Sign(transform.position.z - timmy.transform.position.z))), Time.deltaTime );
-            transform.rotation = Quaternion.Lerp(transform.rotation, timmy.transform.rotation, Time.deltaTime * 100);
+            transform.rotation = Quaternion.Lerp(transform.rotation, timmy.transform.rotation, Time.deltaTime*100);
         }
 
         else if (gameObject.name == "Timmy" && ((karen.transform.position - transform.position).magnitude > 10))
         {
             transform.position = Vector3.Lerp(transform.position, karen.transform.position - new Vector3(10 * (Math.Sign(transform.position.x - karen.transform.position.x)), 0, 10 * (Math.Sign(transform.position.z - karen.transform.position.z))), Time.deltaTime);
-            transform.rotation = Quaternion.Lerp(transform.rotation, karen.transform.rotation, Time.deltaTime * 100);
+            transform.rotation = Quaternion.Lerp(transform.rotation, karen.transform.rotation, Time.deltaTime*100);
         }
 
     }
