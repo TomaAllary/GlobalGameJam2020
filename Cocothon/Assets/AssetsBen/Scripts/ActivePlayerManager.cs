@@ -27,14 +27,18 @@ public class ActivePlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
-            timmy.gameObject.GetComponent<PlayerMovement>().activeToggle();
-            karen.gameObject.GetComponent<PlayerMovement>().activeToggle();
+            timmy.gameObject.GetComponent<PlayerMovement>().isActive = true;
+            karen.gameObject.GetComponent<PlayerMovement>().isActive = false;
         }
-        if (timmy.gameObject.GetComponent<PlayerMovement>().isActive)
-            cam.transform.position = timmy.transform.position + camOffset;
-        else
+        else {
+            timmy.gameObject.GetComponent<PlayerMovement>().isActive = false;
+            karen.gameObject.GetComponent<PlayerMovement>().isActive = true;
+        }
+        //if (timmy.gameObject.GetComponent<PlayerMovement>().isActive)
+            //cam.transform.position = timmy.transform.position + camOffset;
+        //else
             cam.transform.position = karen.transform.position + camOffset;
     }
 }

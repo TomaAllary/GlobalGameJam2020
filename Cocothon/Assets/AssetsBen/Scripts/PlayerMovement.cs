@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Make Karen follow Timmy
-        else if(gameObject.name == "Karen" &&  ((timmy.transform.position - transform.position).magnitude > 10))
+        /*else if(gameObject.name == "Karen" &&  ((timmy.transform.position - transform.position).magnitude > 10))
         {
             Vector3 diff = timmy.transform.position - transform.position;
             //ignore y diff
@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
 
             transform.LookAt(transform.position + diff);
             rb.MovePosition(transform.position + diff * Time.deltaTime * speed);
-        }
+        }*/
 
         else if (gameObject.name == "Timmy" && ((karen.transform.position - transform.position).magnitude > 10))
         {
