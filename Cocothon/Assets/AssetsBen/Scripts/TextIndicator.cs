@@ -24,7 +24,7 @@ public class TextIndicator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject active;
+        /*GameObject active;
         if (karen.GetComponent<PlayerMovement>().isActive) {
             active = karen;
             inactive = timmy;
@@ -32,21 +32,20 @@ public class TextIndicator : MonoBehaviour
         else {
             active = timmy;
             inactive = karen;
-        }
+        }*/
 
 
         //look if the inactive character is in screen
-        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cam);
-        if (GeometryUtility.TestPlanesAABB(planes, inactive.GetComponent<Collider>().bounds)) {
-            arrow3D.SetActive(false);
-        }
-        else {
+        Vector3 viewPos = cam.WorldToViewportPoint(timmy.transform.position);
+        if(viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1) {
             arrow3D.SetActive(true);
 
             //"this" is the container of the 3d text arrow
-            this.transform.position = active.transform.position;
-            this.transform.LookAt(inactive.transform.position);
-
+            this.transform.position = karen.transform.position;
+            this.transform.LookAt(timmy.transform.position);
+        }
+        else {
+            arrow3D.SetActive(false);
 
         }
 

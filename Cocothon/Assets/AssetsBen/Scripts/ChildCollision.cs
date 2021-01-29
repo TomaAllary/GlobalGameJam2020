@@ -6,6 +6,7 @@ public class ChildCollision : MonoBehaviour
 {
 
     public int eggsInStock;
+    public Transform eggsLabel;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,7 @@ public class ChildCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        eggsLabel.rotation = Quaternion.Euler(0.0f, gameObject.transform.rotation.z * -1.0f, 0.0f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,6 +25,7 @@ public class ChildCollision : MonoBehaviour
         if (other.CompareTag("Egg"))
         {
             eggsInStock++;
+            eggsLabel.GetComponent<TextMesh>().text = eggsInStock.ToString();
             Destroy(other.gameObject);
         }
     }

@@ -12,9 +12,11 @@ public class PlayerMovement : MonoBehaviour
     public float zRange = 100.00f;
 
     public bool isActive;
+    public bool TimmyisActive;
 
     private GameObject timmy;
     private GameObject karen;
+    private Camera cam;
 
     private Vector3 direction;
     private Rigidbody rb;
@@ -22,10 +24,13 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         timmy = GameObject.Find("Timmy");
         karen = GameObject.Find("Karen");
         rb = this.GetComponent<Rigidbody>();
-      
+        TimmyisActive = true;
+
+
     }
 
     // Update is called once per frame
@@ -33,17 +38,33 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isActive)
         {
+
+            Vector3 oldPos = transform.position;
+
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");
-
 
             if (horizontalInput != 0 || verticalInput != 0) {
                 direction = (horizontalInput * Vector3.right + verticalInput * Vector3.forward).normalized;
                 transform.LookAt(transform.position + direction);
 
-                rb.MovePosition(transform.position + direction * Time.deltaTime * speed);
+
+                //Bound timmy to camera view range
+                bool TimmyCanGo = true;
+                if (gameObject.name == "Timmy") {
+                    Vector3 viewPos = cam.WorldToViewportPoint(transform.position + direction * Time.deltaTime * speed);
+
+                    if (viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1) {
+                        TimmyCanGo = false;
+                    }
+
+                }
+                if(TimmyCanGo)
+                    rb.MovePosition(transform.position + direction * Time.deltaTime * speed);
             }
 
+
+            
 
             //limit of map -> should be walls
             if (transform.position.x < -xRange)
@@ -66,18 +87,6 @@ public class PlayerMovement : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
             }
         }
-
-        //Make Karen follow Timmy
-        /*else if(gameObject.name == "Karen" &&  ((timmy.transform.position - transform.position).magnitude > 10))
-        {
-            Vector3 diff = timmy.transform.position - transform.position;
-            //ignore y diff
-            diff.y = 0;
-            diff.Normalize();
-
-            transform.LookAt(transform.position + diff);
-            rb.MovePosition(transform.position + diff * Time.deltaTime * speed);
-        }*/
 
         else if (gameObject.name == "Timmy" && ((karen.transform.position - transform.position).magnitude > 10))
         {
