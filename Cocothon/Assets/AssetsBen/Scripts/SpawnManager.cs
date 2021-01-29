@@ -14,7 +14,7 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < 10000; i++)
         {
-            Vector3 spawnPos = new Vector3(Random.Range(-spawnRange, spawnRange), 1, Random.Range(-spawnRange, spawnRange));
+            Vector3 spawnPos = new Vector3(Random.Range(-spawnRange, spawnRange), 0, Random.Range(-spawnRange, spawnRange));
             Instantiate(egg);
             egg.transform.position = spawnPos;
         }

@@ -16,7 +16,7 @@ public class ChildMovement : MonoBehaviour
     {
         current = 0;
         paces = Random.Range(30, 150);
-        direction = Random.Range(0, 8);
+        direction = Random.Range(0, 4);
     }
 
     // Update is called once per frame
