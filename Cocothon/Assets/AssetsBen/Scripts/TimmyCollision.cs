@@ -37,7 +37,7 @@ public class TimmyCollision : MonoBehaviour
 
         if (stunt)
         {
-            starsFX.transform.Rotate(0, Time.deltaTime * 3, 0, Space.World);
+            starsFX.transform.Rotate(0, Time.deltaTime * 350, 0, Space.Self);
 
             if (stuntTimer > 0)
                 stuntTimer -= Time.deltaTime;
