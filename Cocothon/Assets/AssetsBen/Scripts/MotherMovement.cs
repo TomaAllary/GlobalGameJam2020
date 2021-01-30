@@ -25,6 +25,8 @@ public class MotherMovement : MonoBehaviour
     public bool isAggressive;
     public int indecision;
     public float indecisionTimer;
+    float aggroCooldownTimer;
+    bool aggroOff;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,13 +40,15 @@ public class MotherMovement : MonoBehaviour
         timmy = GameObject.FindGameObjectWithTag("Timmy");
         target = null;
         lockingTimer = 0;
-        int aggro = Random.Range(0, 2);
+        int aggro = Random.Range(0, 3);
         if (aggro == 1)
             isAggressive = true;
         else
             isAggressive = false;
         indecision = Random.Range(10, 45);
         indecisionTimer = indecision;
+        aggroCooldownTimer = 0;
+        aggroOff = false;
     }
 
     // Update is called once per frame
@@ -53,11 +57,19 @@ public class MotherMovement : MonoBehaviour
     
     void Update()
     {
+
         indecisionTimer -= Time.deltaTime;
-        if(indecisionTimer == 0)
+        if(indecisionTimer <1 )
         {
+            int aggro = Random.Range(0, 3);
+            if (aggro == 1)
+                isAggressive = true;
+            else
+                isAggressive = false;
+            indecision = Random.Range(10, 45);
             indecisionTimer = indecision;
-            isAggressive = !isAggressive;
+            aggroCooldownTimer = 0;
+            aggroOff = false;
             isLocked = false;
         }
     }
@@ -75,7 +87,7 @@ public class MotherMovement : MonoBehaviour
             float distance = Mathf.Infinity;
             GameObject closest = null;
 
-            if (isAggressive)
+            if (isAggressive && !aggroOff)
             {
 
                 if (hitColliders.Length != 0)
@@ -189,9 +201,23 @@ public class MotherMovement : MonoBehaviour
             {
                 lockingTimer = 0;
                 isLocked = false;
+                aggroOff = true;
+                aggroCooldownTimer = 5;
             }
             if ((target.gameObject.CompareTag("Timmy") && target.gameObject.GetComponent<TimmyCollision>().stunt) || (target.gameObject.CompareTag("Child") && target.gameObject.GetComponent<ChildCollision>().stunt))
                 isLocked = false;
+        }
+
+        if (aggroOff)
+        {
+            if (aggroCooldownTimer > 0)
+                aggroCooldownTimer -= Time.deltaTime;
+            else
+            {
+                aggroCooldownTimer = 0;
+                aggroOff = false;
+            }
+
         }
         
     }
@@ -200,6 +226,21 @@ public class MotherMovement : MonoBehaviour
     {
         isLocked = true;
         target = obj;
-        lockingTimer = 5;
+        lockingTimer = 15;
+    }
+
+
+    /***
+     * 
+     * Test to quickly implement mother attack on ennemies
+     * 
+     * **/
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (isAggressive && !aggroOff && collision.gameObject == target)
+            if (collision.gameObject.CompareTag("Child"))
+                target.GetComponent<ChildCollision>().TakeDamage();
+            else
+                target.GetComponent<TimmyCollision>().TakeDamage();
     }
 }
