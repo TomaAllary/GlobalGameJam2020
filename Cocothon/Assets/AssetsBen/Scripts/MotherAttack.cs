@@ -6,9 +6,9 @@ public class MotherAttack : MonoBehaviour
 {
 
     public float defendRange = 10.0f;
+    public ParticleSystem defendVFX;
+
     private bool isAttacking;
-
-
     private float attackTimer;
   
     
@@ -55,6 +55,9 @@ public class MotherAttack : MonoBehaviour
     }
 
     public void DefendKid() {
+
+        defendVFX.Play();
+
         Collider[] ennemies = Physics.OverlapSphere(transform.position, defendRange, LayerMask.GetMask("Child") | LayerMask.GetMask("Mother"));
 
         foreach(Collider collider in ennemies) {
