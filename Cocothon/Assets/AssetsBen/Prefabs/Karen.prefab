@@ -9673,7 +9673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalInput: 0
   verticalInput: 0
-  speed: 3
+  speed: 7
   xRange: 100
   zRange: 100
   isActive: 0
@@ -9815,9 +9815,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4316f86e07fd842b656d9defa17dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defendRange: 10
+  defendRange: 2.6
   defendVFX: {fileID: 1173841486}
-  screamForce: 1
+  screamForce: 5
 --- !u!1001 &7403635505801435943
 PrefabInstance:
   m_ObjectHideFlags: 0
