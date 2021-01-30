@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4315002773641803936}
   - component: {fileID: 5179864397850018254}
   - component: {fileID: -7378187512487791371}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Wild Karen
   m_TagString: Mother
   m_Icon: {fileID: 0}
@@ -129,3 +129,4 @@ MonoBehaviour:
   paces: 0
   children: []
   timmy: {fileID: 0}
+  isLocked: 0
