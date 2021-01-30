@@ -131,15 +131,22 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        else if (gameObject.name == "Timmy" && ((karen.transform.position - transform.position).magnitude > 2))
+        else if (gameObject.name == "Timmy")
         {
-            Vector3 diff = karen.transform.position - transform.position;
-            //ignore y diff
-            diff.y = 0;
-            diff.Normalize();
 
-            transform.LookAt(transform.position + diff);
-            rb.MovePosition(transform.position + diff * Time.fixedDeltaTime * speed);
+            if ((karen.transform.position - transform.position).magnitude > 2) {
+                Vector3 diff = karen.transform.position - transform.position;
+                //ignore y diff
+                diff.y = 0;
+                diff.Normalize();
+
+                transform.LookAt(transform.position + diff);
+
+                if ((karen.transform.position - transform.position).magnitude > 4)
+                    rb.velocity = diff * speed;
+                else
+                    rb.velocity = diff * karen.GetComponent<PlayerMovement>().speed;
+            }
         }
     }
     public void activeToggle()
