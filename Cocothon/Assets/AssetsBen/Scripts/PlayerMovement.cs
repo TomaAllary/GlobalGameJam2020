@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 direction;
     private Rigidbody rb;
 
+    private bool cantAttack;
+    private float attackCooldown;
     
     // Start is called before the first frame update
     void Start()
@@ -30,9 +32,12 @@ public class PlayerMovement : MonoBehaviour
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         timmy = GameObject.Find("Timmy");
         karen = GameObject.Find("Karen");
+        hittingObj = GameObject.Find("Saccoche");
         rb = this.GetComponent<Rigidbody>();
 
         timmyReadyForLaunch = true;
+        cantAttack = false;
+        attackCooldown = 0;
     }
 
     // Update is called once per frame
@@ -45,7 +50,16 @@ public class PlayerMovement : MonoBehaviour
         else {
             timmyReadyForLaunch = false;
         }
-
+        if (cantAttack)
+        {
+            if (attackCooldown > 0)
+                attackCooldown -= Time.deltaTime;
+            else
+            {
+                attackCooldown = 0;
+                cantAttack = false;
+            }
+        }
 
         
 
@@ -56,8 +70,10 @@ public class PlayerMovement : MonoBehaviour
         if (isActive)
         {
 
-            if (Input.GetKeyDown(KeyCode.Space) && gameObject.name == "Karen") {
+            if (Input.GetKeyDown(KeyCode.Space) && gameObject.name == "Karen" && !cantAttack) {                         
                 hittingObj.GetComponent<MotherAttack>().Attack();
+                cantAttack = true;
+                attackCooldown = 1.50f;
             }
             if (Input.GetKeyDown(KeyCode.E) && gameObject.name == "Karen") {
                 hittingObj.GetComponent<MotherAttack>().DefendKid();
@@ -130,4 +146,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isActive = !isActive;
     }
+
+
 }

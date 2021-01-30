@@ -7,11 +7,18 @@ public class MotherAttack : MonoBehaviour
 
     public float defendRange = 10.0f;
     private bool isAttacking;
+
+
+    private float attackTimer;
+  
     
     // Start is called before the first frame update
     void Start()
     {
         isAttacking = false;
+      
+        attackTimer = 0;
+   
     }
 
     // Update is called once per frame
@@ -19,21 +26,32 @@ public class MotherAttack : MonoBehaviour
     {
         if (isAttacking) {
             gameObject.GetComponent<Renderer>().material.color = Color.red;
+            if(attackTimer > 0)
+            {
+                attackTimer -= Time.deltaTime;
+            }
+            else
+            {
+                attackTimer = 0;
+                isAttacking = false;  
+            }
         }
-        else {
+        else 
+        {
             gameObject.GetComponent<Renderer>().material.color = Color.white;
-
+           
         }
     }
 
     void OnTriggerEnter(Collider collider) {
-        if( collider.gameObject.CompareTag("Child") && isAttacking) {
+        if( collider.gameObject.CompareTag("Child") && isAttacking && !collider.gameObject.GetComponent<ChildCollision>().stunt) {
             collider.gameObject.GetComponent<ChildCollision>().TakeDamage();
         }
     }
 
     public void Attack() {
         isAttacking = true;
+        attackTimer = 0.50f;
     }
 
     public void DefendKid() {

@@ -12,28 +12,44 @@ public class ChildCollision : MonoBehaviour
     private float xDropRange;
     private float zDropRange;
 
+    public bool stunt;
+    private float stuntTimer;
+
     // Start is called before the first frame update
     void Start()
     {
         eggsInStock = 0;
         xDropRange = 5f;
         zDropRange = 5f;
+        stunt = false;
+        stuntTimer = 3;
     }
 
     // Update is called once per frame
     void Update()
     {
         eggsLabel.rotation = Quaternion.Euler(0.0f, gameObject.transform.rotation.z * -1.0f, 0.0f);
+        if (stunt)
+        {
+            if (stuntTimer > 0)
+                stuntTimer -= Time.deltaTime;
+            else
+            {
+                stuntTimer = 0;
+                stunt = false;
+            }
+        }
+            
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Egg"))
+       /* if (other.CompareTag("Egg"))
         {
             eggsInStock++;
             eggsLabel.GetComponent<TextMesh>().text = eggsInStock.ToString();
             Destroy(other.gameObject);
-        }
+        }*/
       
     }
 
@@ -41,21 +57,35 @@ public class ChildCollision : MonoBehaviour
     {
         if (collision.gameObject.GetInstanceID() == gameObject.GetComponent<ChildMovement>().parent.GetInstanceID())
             gameObject.GetComponent<ChildMovement>().returningToParent = false;
+
+        if (collision.gameObject.CompareTag("Egg"))
+        {
+            eggsInStock++;
+            eggsLabel.GetComponent<TextMesh>().text = eggsInStock.ToString();
+            Destroy(collision.gameObject);
+        }
     }
 
     public void TakeDamage()
     {
-        print("ayoye tbk!!");
-        if(eggsInStock < 3) {
-            DropEggs(eggsInStock);
-            eggsInStock = 0;
-        }
-        else {
-            eggsInStock -= 3;
-            DropEggs(3);
-        }
+        if (!stunt)
+        {
+            print("ayoye tbk!!");
+            if (eggsInStock < 3)
+            {
+                DropEggs(eggsInStock);
+                eggsInStock = 0;
+            }
+            else
+            {
+                eggsInStock -= 3;
+                DropEggs(3);
+            }
 
-        eggsLabel.GetComponent<TextMesh>().text = eggsInStock.ToString();
+            eggsLabel.GetComponent<TextMesh>().text = eggsInStock.ToString();
+            stunt = true;
+            stuntTimer = 3;
+        }
     }
 
     private void DropEggs(int nb) {
@@ -70,8 +100,6 @@ public class ChildCollision : MonoBehaviour
             Debug.Log("Egg spawned");
 
         }
-
-
     }
 
 }
