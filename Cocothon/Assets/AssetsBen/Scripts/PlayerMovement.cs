@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     public bool isActive;
     public bool timmyReadyForLaunch;
 
+    public GameObject hittingObj;
+
     private GameObject timmy;
     private GameObject karen;
     private Camera cam;
@@ -53,6 +55,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isActive)
         {
+
+            if (Input.GetKeyDown(KeyCode.Space) && gameObject.name == "Karen") {
+                hittingObj.GetComponent<MotherAttack>().Attack();
+            }
+            if (Input.GetKeyDown(KeyCode.E) && gameObject.name == "Karen") {
+                hittingObj.GetComponent<MotherAttack>().DefendKid();
+            }
 
             Vector3 oldPos = transform.position;
 

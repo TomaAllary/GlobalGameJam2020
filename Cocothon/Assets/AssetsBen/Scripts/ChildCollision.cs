@@ -7,11 +7,17 @@ public class ChildCollision : MonoBehaviour
 
     public int eggsInStock;
     public Transform eggsLabel;
+    public GameObject egg;
+
+    private float xDropRange;
+    private float zDropRange;
 
     // Start is called before the first frame update
     void Start()
     {
         eggsInStock = 0;
+        xDropRange = 5f;
+        zDropRange = 5f;
     }
 
     // Update is called once per frame
@@ -39,6 +45,32 @@ public class ChildCollision : MonoBehaviour
 
     public void TakeDamage()
     {
+        print("ayoye tbk!!");
+        if(eggsInStock < 3) {
+            DropEggs(eggsInStock);
+            eggsInStock = 0;
+        }
+        else {
+            eggsInStock -= 3;
+            DropEggs(3);
+        }
+
+        eggsLabel.GetComponent<TextMesh>().text = eggsInStock.ToString();
+    }
+
+    private void DropEggs(int nb) {
+        for (int i = 0; i < nb; i++) {
+            float x = Random.Range(-xDropRange, xDropRange);
+            float z = Random.Range(-zDropRange, zDropRange);
+
+            Vector3 spawnPos = new Vector3(x, 0, z);
+            GameObject egg1 = Instantiate(egg);
+            egg1.transform.position = transform.position + spawnPos;
+
+            Debug.Log("Egg spawned");
+
+        }
+
 
     }
 
