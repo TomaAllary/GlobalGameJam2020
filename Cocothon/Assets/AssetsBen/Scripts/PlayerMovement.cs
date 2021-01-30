@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isActive;
     public bool timmyReadyForLaunch;
 
-    public GameObject hittingObj;
+    public MotherAttack hittingObj;
 
     private GameObject timmy;
     private GameObject karen;
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         timmy = GameObject.Find("Timmy");
         karen = GameObject.Find("Karen");
-        hittingObj = GameObject.Find("Saccoche");
+
         rb = this.GetComponent<Rigidbody>();
 
         timmyReadyForLaunch = true;
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        if((timmy.transform.position - karen.transform.position).magnitude < 6) {
+        if((timmy.transform.position - karen.transform.position).magnitude < 2.5f) {
             timmyReadyForLaunch = true;
         }
         else {
@@ -71,12 +71,12 @@ public class PlayerMovement : MonoBehaviour
         {
 
             if (Input.GetKeyDown(KeyCode.Space) && gameObject.name == "Karen" && !cantAttack) {                         
-                hittingObj.GetComponent<MotherAttack>().Attack();
+                hittingObj.Attack();
                 cantAttack = true;
                 attackCooldown = 1.50f;
             }
             if (Input.GetKeyDown(KeyCode.E) && gameObject.name == "Karen") {
-                hittingObj.GetComponent<MotherAttack>().DefendKid();
+                hittingObj.DefendKid();
             }
 
             Vector3 oldPos = transform.position;
@@ -131,15 +131,22 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        else if (gameObject.name == "Timmy" && ((karen.transform.position - transform.position).magnitude > 5))
+        else if (gameObject.name == "Timmy")
         {
-            Vector3 diff = karen.transform.position - transform.position;
-            //ignore y diff
-            diff.y = 0;
-            diff.Normalize();
 
-            transform.LookAt(transform.position + diff);
-            rb.MovePosition(transform.position + diff * Time.fixedDeltaTime * speed);
+            if ((karen.transform.position - transform.position).magnitude > 2) {
+                Vector3 diff = karen.transform.position - transform.position;
+                //ignore y diff
+                diff.y = 0;
+                diff.Normalize();
+
+                transform.LookAt(transform.position + diff);
+
+                if ((karen.transform.position - transform.position).magnitude > 4)
+                    rb.velocity = diff * speed;
+                else
+                    rb.velocity = diff * karen.GetComponent<PlayerMovement>().speed;
+            }
         }
     }
     public void activeToggle()

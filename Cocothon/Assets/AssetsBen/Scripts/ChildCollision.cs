@@ -12,15 +12,17 @@ public class ChildCollision : MonoBehaviour
     private float xDropRange;
     private float zDropRange;
 
+
     public bool stunt;
     private float stuntTimer;
 
     // Start is called before the first frame update
     void Start()
     {
+
         eggsInStock = 0;
-        xDropRange = 5f;
-        zDropRange = 5f;
+        xDropRange = 1f;
+        zDropRange = 1f;
         stunt = false;
         stuntTimer = 3;
     }
@@ -60,9 +62,11 @@ public class ChildCollision : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Egg"))
         {
-            eggsInStock++;
-            eggsLabel.GetComponent<TextMesh>().text = eggsInStock.ToString();
-            Destroy(collision.gameObject);
+            if (collision.gameObject.GetComponent<EggCollectable>().isPickable()) {
+                eggsInStock++;
+                eggsLabel.GetComponent<TextMesh>().text = eggsInStock.ToString();
+                Destroy(collision.gameObject);
+            }
         }
     }
 
@@ -93,7 +97,7 @@ public class ChildCollision : MonoBehaviour
             float x = Random.Range(-xDropRange, xDropRange);
             float z = Random.Range(-zDropRange, zDropRange);
 
-            Vector3 spawnPos = new Vector3(x, 0, z);
+            Vector3 spawnPos = new Vector3(x, 1.5f, z);
             GameObject egg1 = Instantiate(egg);
             egg1.transform.position = transform.position + spawnPos;
 

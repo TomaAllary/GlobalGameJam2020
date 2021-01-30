@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6128767328292149163}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.969604, y: 1, z: 22.93438}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -94.78438, y: 1, z: -52.28734}
+  m_LocalScale: {x: 0.4, y: 0.5, z: 0.4}
   m_Children:
   - {fileID: 7028631001939387738}
   m_Father: {fileID: 0}
@@ -99,6 +99,7 @@ MonoBehaviour:
   eggsInStock: 0
   eggsLabel: {fileID: 7028631001939387738}
   egg: {fileID: 3900719751238561096, guid: 72cc2eb6b95c7c84d9e9c24281ce484b, type: 3}
+  stunt: 0
 --- !u!114 &6128767328292149162
 MonoBehaviour:
   m_ObjectHideFlags: 0

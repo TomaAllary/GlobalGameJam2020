@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MotherMovement : MonoBehaviour
 {
-    private float speed = 5.00f;
+    private float speed = 3.00f;
     public float xRange = 100.00f;
     public float zRange = 100.00f;
     public int paces;
