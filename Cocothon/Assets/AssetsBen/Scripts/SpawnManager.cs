@@ -37,14 +37,6 @@ public class SpawnManager : MonoBehaviour
             Instantiate(wildKaren);
             wildKaren.transform.position = spawnPos;
         }
-
-
-
-        //Instantiate(karen);
-        //karen.transform.position = new Vector3(3, 3, 3);
-
-        timmy.gameObject.GetComponent<PlayerMovement>().isActive = true;
-        karen.gameObject.GetComponent<PlayerMovement>().isActive = false;
         
     }
 
