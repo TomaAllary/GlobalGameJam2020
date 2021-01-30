@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6128767328292149162}
   - component: {fileID: 6128767328292149200}
   - component: {fileID: -88032183940821166}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Child
   m_TagString: Child
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 7028631001939387738}
   - component: {fileID: 4060098512222784964}
   - component: {fileID: 5920641824453785780}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EggCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
