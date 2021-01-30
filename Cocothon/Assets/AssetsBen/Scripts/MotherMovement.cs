@@ -22,6 +22,9 @@ public class MotherMovement : MonoBehaviour
 
     private float lockingTimer;
 
+    public bool isAggressive;
+    public int indecision;
+    public float indecisionTimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +38,13 @@ public class MotherMovement : MonoBehaviour
         timmy = GameObject.FindGameObjectWithTag("Timmy");
         target = null;
         lockingTimer = 0;
+        int aggro = Random.Range(0, 2);
+        if (aggro == 1)
+            isAggressive = true;
+        else
+            isAggressive = false;
+        indecision = Random.Range(10, 45);
+        indecisionTimer = indecision;
     }
 
     // Update is called once per frame
@@ -43,41 +53,74 @@ public class MotherMovement : MonoBehaviour
     
     void Update()
     {
-        
+        indecisionTimer -= Time.deltaTime;
+        if(indecisionTimer == 0)
+        {
+            indecisionTimer = indecision;
+            isAggressive = !isAggressive;
+            isLocked = false;
+        }
     }
 
     private void FixedUpdate()
     {
 
-        hitColliders = Physics.OverlapSphere(transform.position, 30);
+
         transform.Translate(transform.forward * Time.deltaTime * speed);
         current++;
 
         if (!isLocked)
         {
-            if (hitColliders.Length != 0)
-            {
-                float distance = Mathf.Infinity;
-                GameObject closestChild = null;
+            hitColliders = Physics.OverlapSphere(transform.position, 30);
+            float distance = Mathf.Infinity;
+            GameObject closest = null;
 
+            if (isAggressive)
+            {
+
+                if (hitColliders.Length != 0)
+                {
+
+
+
+                    foreach (var v in hitColliders)
+                    {
+                        if (v.gameObject.CompareTag("Timmy") && !v.gameObject.GetComponent<TimmyCollision>().stunt)
+                        {
+                            lockTarget(v.gameObject);
+                            break;
+                        }
+                        else if (v.CompareTag("Child") && (v.gameObject.GetComponent<ChildMovement>().parent.GetInstanceID() != gameObject.GetInstanceID()) && !v.gameObject.GetComponent<ChildCollision>().stunt)
+                        {
+                            float currentDistance = (v.transform.position - transform.position).sqrMagnitude;
+                            if (currentDistance < distance)
+                            {
+                                closest = v.gameObject;
+                                distance = currentDistance;
+                            }
+                        }
+                        if (closest != null)
+                            lockTarget(closest);
+                    }
+
+                }
+            }
+            else
+            {
                 foreach (var v in hitColliders)
                 {
-                    if (v.gameObject.CompareTag("Timmy")&& !v.gameObject.GetComponent<TimmyCollision>().stunt)
-                    {
-                        lockTarget(v.gameObject);
-                        break;
-                    }
-                    else if (v.CompareTag("Child") && (v.gameObject.GetComponent<ChildMovement>().parent.GetInstanceID() != gameObject.GetInstanceID()) && !v.gameObject.GetComponent<ChildCollision>().stunt)
+
+                    if (v.CompareTag("Mother"))
                     {
                         float currentDistance = (v.transform.position - transform.position).sqrMagnitude;
                         if (currentDistance < distance)
                         {
-                            closestChild = v.gameObject;
+                            closest = v.gameObject;
                             distance = currentDistance;
                         }
                     }
-                    if (closestChild != null)
-                        lockTarget(closestChild);
+                    if (closest != null)
+                        lockTarget(closest);
                 }
             }
         }
@@ -87,11 +130,19 @@ public class MotherMovement : MonoBehaviour
 
             diff.y = 0;
             diff.Normalize();
+            if (isAggressive)
+            {
+                transform.LookAt(transform.position + diff);
+                rb.velocity = transform.forward * speed;
+            }
+            else
+            {
+                transform.LookAt(transform.position - diff);
+                rb.velocity = transform.forward * speed;
+            }
 
-            transform.LookAt(transform.position + diff);
-            rb.MovePosition(transform.position + diff * Time.deltaTime * speed);
         }
-        //else if 
+
         else
         {
             if (current == paces)
@@ -142,6 +193,7 @@ public class MotherMovement : MonoBehaviour
             if ((target.gameObject.CompareTag("Timmy") && target.gameObject.GetComponent<TimmyCollision>().stunt) || (target.gameObject.CompareTag("Child") && target.gameObject.GetComponent<ChildCollision>().stunt))
                 isLocked = false;
         }
+        
     }
 
     void lockTarget(GameObject obj)
