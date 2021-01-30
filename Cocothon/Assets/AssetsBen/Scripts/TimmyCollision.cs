@@ -11,6 +11,8 @@ public class TimmyCollision : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public int eggsInStock;
 
+    public GameObject starsFX;
+
     private float xDropRange;
     private float zDropRange;
 
@@ -31,8 +33,12 @@ public class TimmyCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        starsFX.SetActive(stunt);
+
         if (stunt)
         {
+            starsFX.transform.Rotate(0, Time.deltaTime * 3, 0, Space.World);
+
             if (stuntTimer > 0)
                 stuntTimer -= Time.deltaTime;
             else
@@ -70,7 +76,6 @@ public class TimmyCollision : MonoBehaviour
     {
         if (!stunt)
         {
-            print("ayoye tbk!!");
             if (eggsInStock < 3)
             {
                 DropEggs(eggsInStock);

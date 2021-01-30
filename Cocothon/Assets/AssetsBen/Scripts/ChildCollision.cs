@@ -9,6 +9,8 @@ public class ChildCollision : MonoBehaviour
     public Transform eggsLabel;
     public GameObject egg;
 
+    public GameObject starsFX;
+
     private float xDropRange;
     private float zDropRange;
 
@@ -31,8 +33,13 @@ public class ChildCollision : MonoBehaviour
     void Update()
     {
         eggsLabel.rotation = Quaternion.Euler(0.0f, gameObject.transform.rotation.z * -1.0f, 0.0f);
+
+        starsFX.SetActive(true);
+        starsFX.transform.Rotate(0, Time.deltaTime * 3, 0, Space.World);
+
         if (stunt)
         {
+
             if (stuntTimer > 0)
                 stuntTimer -= Time.deltaTime;
             else
