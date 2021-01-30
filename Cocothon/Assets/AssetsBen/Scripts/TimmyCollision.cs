@@ -58,9 +58,11 @@ public class TimmyCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Egg"))
         {
-            eggsInStock++;
-            scoreText.text = "Oeufs: " + eggsInStock;
-            Destroy(collision.gameObject);
+            if (collision.gameObject.GetComponent<EggCollectable>().isPickable()) {
+                eggsInStock++;
+                scoreText.text = "Oeufs: " + eggsInStock;
+                Destroy(collision.gameObject);
+            }
         }
     }
 
