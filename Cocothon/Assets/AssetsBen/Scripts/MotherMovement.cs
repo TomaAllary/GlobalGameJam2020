@@ -12,9 +12,13 @@ public class MotherMovement : MonoBehaviour
     private int direction;
 
     public GameObject[] children; 
-    //public GameObject timmy; 
+    public GameObject timmy; 
 
     private Rigidbody rb;
+
+    public bool isLocked;
+    Collider[] hitColliders;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,15 +29,35 @@ public class MotherMovement : MonoBehaviour
         rb = this.GetComponent<Rigidbody>();
 
         children = GameObject.FindGameObjectsWithTag("Child");
-        //timmy = GameObject.FindGameObjectWithTag("Timmy");
+        timmy = GameObject.FindGameObjectWithTag("Timmy");
+        
     }
 
     // Update is called once per frame
+   
+    
+    
     void Update()
     {
+       
+    }
+
+    private void FixedUpdate()
+    {
+
+        hitColliders = Physics.OverlapSphere(transform.position, 30);
         transform.Translate(transform.forward * Time.deltaTime * speed);
         current++;
-        /*if ((transform.position - timmy.transform.position).magnitude < 50)
+
+        if(hitColliders.Length != 0)
+        {
+            foreach(var v in hitColliders)
+            {
+                //if (v.gameObject.CompareTag("Timmy")
+
+            }
+        }
+        if ((transform.position - timmy.transform.position).magnitude < 30)
         {
             Vector3 diff = timmy.transform.position - transform.position;
 
@@ -43,8 +67,9 @@ public class MotherMovement : MonoBehaviour
             transform.LookAt(transform.position + diff);
             rb.MovePosition(transform.position + diff * Time.deltaTime * speed);
         }
+        //else if 
         else
-        {*/
+        {
             if (current == paces)
             {
                 current = 0;
@@ -53,26 +78,30 @@ public class MotherMovement : MonoBehaviour
 
                 transform.Rotate(new Vector3(0, direction, 0));
             }
-        //}
+        }
 
         if (transform.position.x < -xRange)
         {
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+            transform.Rotate(new Vector3(0, 180, 0));
         }
 
         if (transform.position.x > xRange)
         {
             transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+            transform.Rotate(new Vector3(0, 180, 0));
         }
 
         if (transform.position.z < -zRange)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, -zRange);
+            transform.Rotate(new Vector3(0, 180, 0));
         }
 
         if (transform.position.z > zRange)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
+            transform.Rotate(new Vector3(0, 180, 0));
         }
     }
 }

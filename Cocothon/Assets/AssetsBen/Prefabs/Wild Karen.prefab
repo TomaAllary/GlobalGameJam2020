@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2003234104320566987}
   - component: {fileID: 4315002773641803936}
   - component: {fileID: 5179864397850018254}
+  - component: {fileID: -7378187512487791371}
   m_Layer: 0
   m_Name: Wild Karen
   m_TagString: Mother
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6643670883992372103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 63.384506, y: 1, z: -83.543915}
+  m_LocalPosition: {x: 6.0882187, y: 1, z: -74.23605}
   m_LocalScale: {x: 1.5, y: 3, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -111,3 +112,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 3
+--- !u!114 &-7378187512487791371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6643670883992372103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc243a8784ac1fc4189c4324c2050112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xRange: 100
+  zRange: 100
+  paces: 0
+  children: []
+  timmy: {fileID: 0}
