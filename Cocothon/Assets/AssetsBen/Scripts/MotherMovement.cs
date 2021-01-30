@@ -12,7 +12,7 @@ public class MotherMovement : MonoBehaviour
     private int direction;
 
     public GameObject[] children; 
-    public GameObject timmy; 
+    //public GameObject timmy; 
 
     private Rigidbody rb;
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class MotherMovement : MonoBehaviour
         rb = this.GetComponent<Rigidbody>();
 
         children = GameObject.FindGameObjectsWithTag("Child");
-        timmy = GameObject.FindGameObjectWithTag("Timmy");
+        //timmy = GameObject.FindGameObjectWithTag("Timmy");
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class MotherMovement : MonoBehaviour
     {
         transform.Translate(transform.forward * Time.deltaTime * speed);
         current++;
-        if ((transform.position - timmy.transform.position).magnitude < 50)
+        /*if ((transform.position - timmy.transform.position).magnitude < 50)
         {
             Vector3 diff = timmy.transform.position - transform.position;
 
@@ -44,7 +44,7 @@ public class MotherMovement : MonoBehaviour
             rb.MovePosition(transform.position + diff * Time.deltaTime * speed);
         }
         else
-        {
+        {*/
             if (current == paces)
             {
                 current = 0;
@@ -53,7 +53,7 @@ public class MotherMovement : MonoBehaviour
 
                 transform.Rotate(new Vector3(0, direction, 0));
             }
-        }
+        //}
 
         if (transform.position.x < -xRange)
         {

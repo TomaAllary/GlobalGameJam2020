@@ -10,8 +10,9 @@ public class ChildMovement : MonoBehaviour
     public int paces;
     private int current;
     private int direction;
-    private bool returningToParent;
 
+    public bool returningToParent;
+    public Rigidbody rb;
     public GameObject parent;
 
     // Start is called before the first frame update
@@ -23,26 +24,31 @@ public class ChildMovement : MonoBehaviour
         transform.Rotate(new Vector3(0, direction, 0));
       
         parent = findClosestKaren();
-        returningToParent = true;
+        returningToParent = false;
+        rb = this.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        //if((parent.transform.position - transform.position).sqrMagnitude < 100)
-        transform.Translate(transform.forward * Time.deltaTime * speed);
-        current++;
 
+        if ((parent.transform.position - transform.position).sqrMagnitude > 200)
+            returningToParent = true;
 
-        if (current == paces)
+        if (!returningToParent)
         {
-            current = 0;
-            paces = Random.Range(150, 1000);
-            direction = Random.Range(0, 360);
+            transform.Translate(transform.forward * Time.deltaTime * speed);
+            current++;
 
-            transform.Rotate(new Vector3(0, direction, 0));
-        }
+
+            if (current == paces)
+            {
+                current = 0;
+                paces = Random.Range(150, 1000);
+                direction = Random.Range(0, 360);
+
+                transform.Rotate(new Vector3(0, direction, 0));
+            }
 
 
             if (transform.position.x < -xRange)
@@ -65,7 +71,19 @@ public class ChildMovement : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
             }
 
-        
+
+        }
+
+        else
+        {
+            Vector3 diff = parent.transform.position - transform.position;
+            //ignore y diff
+            diff.y = 0;
+            diff.Normalize();
+
+            transform.LookAt(transform.position + diff);
+            rb.MovePosition(transform.position + diff * Time.fixedDeltaTime * speed);
+        }
     }
 
     GameObject findClosestKaren()
@@ -85,4 +103,6 @@ public class ChildMovement : MonoBehaviour
 
         return closestKaren;
     }
+
+   
 }

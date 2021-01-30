@@ -28,6 +28,18 @@ public class ChildCollision : MonoBehaviour
             eggsLabel.GetComponent<TextMesh>().text = eggsInStock.ToString();
             Destroy(other.gameObject);
         }
+      
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetInstanceID() == gameObject.GetComponent<ChildMovement>().parent.GetInstanceID())
+            gameObject.GetComponent<ChildMovement>().returningToParent = false;
+    }
+
+    public void TakeDamage()
+    {
+
     }
 
 }

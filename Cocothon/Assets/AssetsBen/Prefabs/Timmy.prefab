@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 1102600009223424525}
   - component: {fileID: 1102600009223424524}
   - component: {fileID: 1102600009223424535}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Timmy
-  m_TagString: Child
+  m_TagString: Timmy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   xRange: 100
   zRange: 100
   isActive: 1
-  cam: {fileID: 0}
+  timmyReadyForLaunch: 0
 --- !u!54 &1102600009223424525
 Rigidbody:
   m_ObjectHideFlags: 0
