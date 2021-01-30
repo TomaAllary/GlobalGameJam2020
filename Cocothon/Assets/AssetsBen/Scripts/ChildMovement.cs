@@ -32,7 +32,7 @@ public class ChildMovement : MonoBehaviour
     void Update()
     {
 
-        if ((parent.transform.position - transform.position).sqrMagnitude > 200)
+        if ((parent.transform.position - transform.position).sqrMagnitude > 50)
             returningToParent = true;
 
         if (!returningToParent)

@@ -10,20 +10,16 @@ public class ActivePlayerManager : MonoBehaviour
     public GameObject karen;
     public GameObject cam;
 
-    private Vector3 camOffset;
     private bool timmyLaunched;
 
     void Start()
     {
         timmyLaunched = false;
-        
-        if (timmy.gameObject.GetComponent<PlayerMovement>().isActive)
-            camOffset = cam.transform.position - timmy.transform.position;
-        else
-            camOffset = cam.transform.position - karen.transform.position;
 
         timmy = GameObject.Find("Timmy");
         karen = GameObject.Find("Karen");
+
+
     }
 
     // Update is called once per frame
@@ -47,9 +43,5 @@ public class ActivePlayerManager : MonoBehaviour
             timmy.gameObject.GetComponent<PlayerMovement>().isActive = false;
             karen.gameObject.GetComponent<PlayerMovement>().isActive = true;
         }
-        //if (timmy.gameObject.GetComponent<PlayerMovement>().isActive)
-            //cam.transform.position = timmy.transform.position + camOffset;
-        //else
-            cam.transform.position = karen.transform.position + camOffset;
     }
 }
