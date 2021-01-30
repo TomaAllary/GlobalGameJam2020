@@ -5,8 +5,10 @@ using UnityEngine;
 public class MotherAttack : MonoBehaviour
 {
 
-    public float defendRange = 10.0f;
+    public float defendRange = 2.6f;
     public ParticleSystem defendVFX;
+    public float screamForce = 5f;
+
 
     private bool isAttacking;
     private float attackTimer;
@@ -64,7 +66,7 @@ public class MotherAttack : MonoBehaviour
             Rigidbody rb = collider.attachedRigidbody;
 
             if (rb) {
-                Vector3 defendForce = rb.transform.position - transform.position;
+                Vector3 defendForce = (screamForce / (rb.transform.position - transform.position).magnitude) * (rb.transform.position - transform.position);
                 defendForce.y = 0;
                 rb.AddForce(defendForce, ForceMode.Impulse);
             }
