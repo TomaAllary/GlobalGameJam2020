@@ -1975,10 +1975,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Timmy
       objectReference: {fileID: 0}
-    - target: {fileID: 8053571758080212014, guid: dcb8f431638129445ab159b61e2f96ae,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcb8f431638129445ab159b61e2f96ae, type: 3}

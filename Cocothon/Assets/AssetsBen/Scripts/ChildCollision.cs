@@ -34,11 +34,11 @@ public class ChildCollision : MonoBehaviour
     {
         eggsLabel.rotation = Quaternion.Euler(0.0f, gameObject.transform.rotation.z * -1.0f, 0.0f);
 
-        starsFX.SetActive(true);
-        starsFX.transform.Rotate(0, Time.deltaTime * 3, 0, Space.World);
+        starsFX.SetActive(stunt);
 
         if (stunt)
         {
+            starsFX.transform.Rotate(0, Time.deltaTime * 350, 0, Space.Self);
 
             if (stuntTimer > 0)
                 stuntTimer -= Time.deltaTime;
