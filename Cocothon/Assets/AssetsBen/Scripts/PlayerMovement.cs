@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //limit of map -> should be walls
-        if (transform.position.x < -xRange) {
+        /*if (transform.position.x < -xRange) {
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
         }
 
@@ -164,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (transform.position.z > zRange) {
             transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
-        }
+        }*/
     }
 
 

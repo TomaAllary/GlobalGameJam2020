@@ -5,7 +5,8 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
 
-    private float spawnRange = 100;
+    private Vector2 spawnRangeX = new Vector2(60, -1);
+    private Vector2 spawnRangeZ = new Vector2(60, -5);
     public int numberOfChildren = 500;
     public int ratioMotherChildren = 5;
     public GameObject egg;
@@ -19,21 +20,21 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < 3000; i++)
         {
-            Vector3 spawnPos = new Vector3(Random.Range(-spawnRange, spawnRange), 0, Random.Range(-spawnRange, spawnRange));
+            Vector3 spawnPos = new Vector3(Random.Range(spawnRangeX.x, spawnRangeX.y), 40, Random.Range(spawnRangeZ.x, spawnRangeZ.y));
             Instantiate(egg);
             egg.transform.position = spawnPos;
         }
 
         for (int i = 0; i < numberOfChildren; i++)
         {
-            Vector3 spawnPos = new Vector3(Random.Range(-spawnRange, spawnRange), 1, Random.Range(-spawnRange, spawnRange));
+            Vector3 spawnPos = new Vector3(Random.Range(spawnRangeX.x, spawnRangeX.y), 40, Random.Range(spawnRangeZ.x, spawnRangeZ.y));
             Instantiate(child);
             child.transform.position = spawnPos;
         }
 
         for (int i = 0; i < (numberOfChildren / ratioMotherChildren); i++)
         {
-            Vector3 spawnPos = new Vector3(Random.Range(-spawnRange, spawnRange), 1, Random.Range(-spawnRange, spawnRange));
+            Vector3 spawnPos = new Vector3(Random.Range(spawnRangeX.x, spawnRangeX.y), 40, Random.Range(spawnRangeZ.x, spawnRangeZ.y));
             Instantiate(wildKaren);
             wildKaren.transform.position = spawnPos;
         }

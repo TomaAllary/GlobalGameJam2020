@@ -54,7 +54,7 @@ public class ChildMovement : MonoBehaviour
             //transform.Translate(transform.forward * Time.deltaTime * speed);
             current++;
 
-            if (transform.position.x < -xRange)
+            /*if (transform.position.x < -xRange)
             {
                 transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
             }
@@ -72,7 +72,7 @@ public class ChildMovement : MonoBehaviour
             if (transform.position.z > zRange)
             {
                 transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
-            }
+            }*/
 
 
         }

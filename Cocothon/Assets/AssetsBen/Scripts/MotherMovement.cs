@@ -169,7 +169,7 @@ public class MotherMovement : MonoBehaviour
             }
         }
 
-        if (transform.position.x < -xRange)
+        /*if (transform.position.x < -xRange)
         {
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
             transform.Rotate(new Vector3(0, 180, 0));
@@ -191,7 +191,7 @@ public class MotherMovement : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
             transform.Rotate(new Vector3(0, 180, 0));
-        }
+        }*/
 
         if (isLocked)
         {
