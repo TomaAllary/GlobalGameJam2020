@@ -241,7 +241,7 @@ public class MotherMovement : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Child"))
                 target.GetComponent<ChildCollision>().TakeDamage();
-            else
+            else if(collision.gameObject.CompareTag("Timmy"))
                 target.GetComponent<TimmyCollision>().TakeDamage();
         }
     }

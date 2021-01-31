@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3d49c3709616b47adc7e1c05ca46f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfChildren: 1
+  numberOfChildren: 100
   ratioMotherChildren: 1
   egg: {fileID: 3900719751238561096, guid: 72cc2eb6b95c7c84d9e9c24281ce484b, type: 3}
   child: {fileID: 6128767328292149163, guid: c800467986dffd74dab94359555ffb5a, type: 3}
