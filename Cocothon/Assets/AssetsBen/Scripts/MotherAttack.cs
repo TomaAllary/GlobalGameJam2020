@@ -8,6 +8,7 @@ public class MotherAttack : MonoBehaviour
     public float defendRange = 2.6f;
     public ParticleSystem defendVFX;
     public float screamForce = 5f;
+    public Renderer handbagMat;
 
 
     private bool isAttacking;
@@ -27,7 +28,7 @@ public class MotherAttack : MonoBehaviour
     void Update()
     {
         if (isAttacking) {
-            gameObject.GetComponent<Renderer>().material.color = Color.red;
+            handbagMat.material.color = Color.red;
             if(attackTimer > 0)
             {
                 attackTimer -= Time.deltaTime;
@@ -40,7 +41,7 @@ public class MotherAttack : MonoBehaviour
         }
         else 
         {
-            gameObject.GetComponent<Renderer>().material.color = Color.white;
+            handbagMat.material.color = new Color(173, 0, 156);
            
         }
     }
