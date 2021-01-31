@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class PlayerMovement : MonoBehaviour
     public GameObject gameMenu;
 
     public bool menuActive;
+
+    public AudioSource karenAudio;
+    public AudioClip karenPas;
+
+    private int tickPace;
     
     // Start is called before the first frame update
     void Start()
@@ -38,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         attackCooldown = 0;
 
         menuActive = false;
+        tickPace++;
     }
 
     // Update is called once per frame
@@ -102,6 +109,13 @@ public class PlayerMovement : MonoBehaviour
                 transform.LookAt(transform.position + direction);
 
                 rb.MovePosition(transform.position + direction * Time.fixedDeltaTime * speed);
+                if(tickPace == 17)
+                {
+                    karenAudio.PlayOneShot(karenPas);
+                    tickPace = 0;
+                }
+                tickPace++;
+                
             }
             else {
                 animator.SetBool("isRunning", false);
