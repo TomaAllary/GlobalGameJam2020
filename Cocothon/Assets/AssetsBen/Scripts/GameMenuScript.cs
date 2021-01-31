@@ -8,10 +8,12 @@ public class GameMenuScript : MonoBehaviour
     Button startButton;
     Button restartButton;
     Button quitButton;
+    GameObject menu;
 
     // Start is called before the first frame update
     void Start()
     {
+        menu.SetActive(false);
         if(Langue.LangueSelectionnee == "Francais")
         {
 
