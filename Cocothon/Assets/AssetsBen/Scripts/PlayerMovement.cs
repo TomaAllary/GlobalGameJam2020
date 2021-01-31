@@ -107,19 +107,14 @@ public class PlayerMovement : MonoBehaviour
                     Vector3 destination = new Vector3(hit.point.x, timmy.transform.position.y, hit.point.z);
 
                     timmy.transform.LookAt(destination);
-                    rb.velocity =  (destination - transform.position).normalized * speed;
+
+                    rb.MovePosition(transform.position + ((destination - transform.position).normalized * speed * Time.deltaTime));
+
+                    //rb.velocity =  (destination - transform.position).normalized * speed;
 
                 }
 
-                if (rb.velocity.x != 0 || rb.velocity.z != 0) {
-                    animator.SetBool("isRunning", true);
-                }
-                else {
-                    animator.SetBool("isRunning", false);
-                }
-
-
-
+                animator.SetBool("isRunning", true);
 
             }
             else {
@@ -138,9 +133,13 @@ public class PlayerMovement : MonoBehaviour
                     transform.LookAt(transform.position + diff);
 
                     if ((karen.transform.position - transform.position).magnitude > 4.5f)
-                        rb.velocity = diff * speed;
+                        rb.MovePosition(transform.position + (diff * speed * Time.deltaTime));
+
+                    //rb.velocity = diff * speed;
                     else
-                        rb.velocity = diff * karen.GetComponent<PlayerMovement>().speed;
+                        rb.MovePosition(transform.position + (diff * karen.GetComponent<PlayerMovement>().speed * Time.deltaTime));
+
+                    //rb.velocity = diff * karen.GetComponent<PlayerMovement>().speed;
                 }
                 else {
                     animator.SetBool("isRunning", false);
