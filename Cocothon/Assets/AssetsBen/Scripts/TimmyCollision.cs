@@ -25,7 +25,8 @@ public class TimmyCollision : MonoBehaviour {
         eggsInStock = 0;
         stunt = false;
         stuntTimer = 0;
-        egg = GameObject.FindGameObjectWithTag("Egg");
+        xDropRange = 1f;
+        zDropRange = 1f;
     }
 
     // Update is called once per frame
