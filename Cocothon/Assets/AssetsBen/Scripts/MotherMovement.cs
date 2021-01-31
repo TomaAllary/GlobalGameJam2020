@@ -149,12 +149,18 @@ public class MotherMovement : MonoBehaviour
             if (isAggressive)
             {
                 transform.LookAt(transform.position + diff);
-                rb.velocity = transform.forward * speed;
+
+                rb.MovePosition(transform.position + (transform.forward * speed * Time.deltaTime));
+
+                //rb.velocity = transform.forward * speed;
             }
             else
             {
                 transform.LookAt(transform.position - diff);
-                rb.velocity = transform.forward * speed;
+
+                rb.MovePosition(transform.position + (transform.forward * speed * Time.deltaTime));
+
+                //rb.velocity = transform.forward * speed;
             }
 
         }

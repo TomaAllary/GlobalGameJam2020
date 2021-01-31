@@ -50,7 +50,10 @@ public class ChildMovement : MonoBehaviour
 
                 transform.Rotate(new Vector3(0, direction, 0));
             }
-            rb.velocity = transform.forward * speed;
+
+            rb.MovePosition(transform.position + (transform.forward * speed * Time.deltaTime));
+
+            //rb.velocity = transform.forward * speed;
             //transform.Translate(transform.forward * Time.deltaTime * speed);
             current++;
 
