@@ -86,6 +86,7 @@ MonoBehaviour:
   paces: 0
   children: []
   timmy: {fileID: 0}
+  animator: {fileID: 666288562}
   isLocked: 0
   target: {fileID: 0}
   isAggressive: 0

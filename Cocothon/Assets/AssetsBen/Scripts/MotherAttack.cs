@@ -54,7 +54,7 @@ public class MotherAttack : MonoBehaviour
 
     public void Attack() {
         isAttacking = true;
-        attackTimer = 0.50f;
+        attackTimer = 0.63f;
     }
 
     public void DefendKid() {
