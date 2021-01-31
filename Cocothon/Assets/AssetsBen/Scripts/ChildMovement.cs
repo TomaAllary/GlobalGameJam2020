@@ -8,6 +8,7 @@ public class ChildMovement : MonoBehaviour
     public float xRange = 100.00f;
     public float zRange = 100.00f;
     public int paces;
+
     private int current;
     private int direction;
 
@@ -31,7 +32,6 @@ public class ChildMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if ((parent.transform.position - transform.position).sqrMagnitude > 50)
             returningToParent = true;
 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6d5ea027f63b6614abb644054edada18
+guid: 49d17b69a1c0f644fbfe96bed51d0fdf
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
@@ -10,13 +10,24 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: cheveux
-    second: {fileID: 2100000, guid: bfbe22eeb3e27334492de87d0c2fcd0a, type: 2}
+      name: Visage
+    second: {fileID: 3695395009803230652, guid: 49ca33cbf2263994283aa0ace1b20ed7,
+      type: 3}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: visage
-    second: {fileID: 2100000, guid: e5412b0fb82fff548ac45429d7407f05, type: 2}
+      name: chemise
+    second: {fileID: 2100000, guid: 3d8367cece3b5b94b9fefc8fddb97cb7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cheveux
+    second: {fileID: 2100000, guid: 8b5ac8f4ebd585c49a1a449814bfc01a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vetement
+    second: {fileID: 2100000, guid: f596f51b8b8a7604ebaa5f235cb34f87, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

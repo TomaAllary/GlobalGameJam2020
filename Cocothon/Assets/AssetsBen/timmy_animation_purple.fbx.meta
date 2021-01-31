@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6d5ea027f63b6614abb644054edada18
+guid: 9fa489a3eb81e45428ee05aef82a879e
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
@@ -10,13 +10,25 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: cheveux
-    second: {fileID: 2100000, guid: bfbe22eeb3e27334492de87d0c2fcd0a, type: 2}
+      name: Visage
+    second: {fileID: 3695395009803230652, guid: 49ca33cbf2263994283aa0ace1b20ed7,
+      type: 3}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: visage
-    second: {fileID: 2100000, guid: e5412b0fb82fff548ac45429d7407f05, type: 2}
+      name: chemise
+    second: {fileID: 2100000, guid: 2e3c23c044f014c4d8ae10bf2860fd73, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cheveux
+    second: {fileID: 2100000, guid: 8de1ea6ab2df1c640a70369e5e04e82a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vetement
+    second: {fileID: -2412672266388990387, guid: 6d5ea027f63b6614abb644054edada18,
+      type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -43,7 +55,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 1
+      lastFrame: 16
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
     isReadable: 0
   meshes:
     lODScreenPercentages: []

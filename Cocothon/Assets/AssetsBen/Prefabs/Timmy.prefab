@@ -97,9 +97,7 @@ MonoBehaviour:
   speed: 6
   xRange: 100
   zRange: 100
-  timmyAnim: {fileID: 1477347630}
-  isActive: 1
-  timmyReadyForLaunch: 0
+  animator: {fileID: 1477347630}
   hittingObj: {fileID: 0}
 --- !u!54 &6795068623083859273
 Rigidbody:
