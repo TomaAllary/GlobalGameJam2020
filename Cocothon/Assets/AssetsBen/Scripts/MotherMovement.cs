@@ -78,11 +78,13 @@ public class MotherMovement : MonoBehaviour
     {
 
 
-        transform.Translate(transform.forward * Time.deltaTime * speed);
-        current++;
+        
 
         if (!isLocked)
         {
+            transform.Translate(transform.forward * Time.deltaTime * speed);
+            current++;
+
             hitColliders = Physics.OverlapSphere(transform.position, 30);
             float distance = Mathf.Infinity;
             GameObject closest = null;
@@ -226,7 +228,7 @@ public class MotherMovement : MonoBehaviour
     {
         isLocked = true;
         target = obj;
-        lockingTimer = 15;
+        lockingTimer = 15.0f;
     }
 
 
