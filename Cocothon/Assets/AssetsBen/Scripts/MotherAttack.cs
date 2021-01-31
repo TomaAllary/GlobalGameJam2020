@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class MotherAttack : MonoBehaviour
 {
@@ -13,7 +14,15 @@ public class MotherAttack : MonoBehaviour
 
     private bool isAttacking;
     private float attackTimer;
-  
+    private float voiceTimer;
+    private bool canVoice;
+
+    public AudioSource karenSound;
+    public AudioClip[] shoutFr;
+    public AudioClip[] shoutEn;
+    public AudioClip attaqueFr;
+    public AudioClip attaqueEn;
+
     
     // Start is called before the first frame update
     void Start()
@@ -21,7 +30,8 @@ public class MotherAttack : MonoBehaviour
         isAttacking = false;
       
         attackTimer = 0;
-   
+        voiceTimer = 0;
+        canVoice = true;
     }
 
     // Update is called once per frame
@@ -44,6 +54,17 @@ public class MotherAttack : MonoBehaviour
             handbagMat.material.color = new Color(173, 0, 156);
            
         }
+        if(voiceTimer > 0)
+        {
+            voiceTimer -= Time.deltaTime;
+        }
+        else
+        {
+            voiceTimer = 0;
+            canVoice = true;
+        }
+       
+           
     }
 
     void OnTriggerEnter(Collider collider) {
@@ -54,12 +75,30 @@ public class MotherAttack : MonoBehaviour
 
     public void Attack() {
         isAttacking = true;
-        attackTimer = 0.63f;
+        attackTimer = 1.0f;
+        if (canVoice)
+        {
+            if (Langue.LangueSelectionnee == "Francais")
+            {
+                karenSound.PlayOneShot(attaqueFr);
+                voiceTimer = 3;
+                canVoice = false;
+            }
+            else
+            {
+                karenSound.PlayOneShot(attaqueEn);
+                voiceTimer = 3;
+                canVoice = false;
+            }
+        }
+        
+
     }
 
     public void DefendKid() {
 
         defendVFX.Play();
+
 
         Collider[] ennemies = Physics.OverlapSphere(transform.position, defendRange, LayerMask.GetMask("Child") | LayerMask.GetMask("Mother"));
 
