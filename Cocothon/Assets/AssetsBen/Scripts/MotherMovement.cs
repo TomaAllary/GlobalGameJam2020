@@ -12,7 +12,9 @@ public class MotherMovement : MonoBehaviour
     private int direction;
 
     public GameObject[] children; 
-    public GameObject timmy; 
+    public GameObject timmy;
+
+    public Animator animator;
 
     private Rigidbody rb;
 
@@ -241,6 +243,7 @@ public class MotherMovement : MonoBehaviour
     {
         if (isAggressive && !aggroOff && collision.gameObject.GetInstanceID() == target.gameObject.GetInstanceID())
         {
+            animator.SetTrigger("hit");
             if (collision.gameObject.CompareTag("Child"))
                 target.GetComponent<ChildCollision>().TakeDamage();
             else if(collision.gameObject.CompareTag("Timmy"))
