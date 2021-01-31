@@ -22,6 +22,9 @@ public class PlayerMovement : MonoBehaviour
 
     private bool cantAttack;
     private float attackCooldown;
+    public GameObject gameMenu;
+
+    public bool menuActive;
     
     // Start is called before the first frame update
     void Start()
@@ -33,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
 
         cantAttack = false;
         attackCooldown = 0;
+
+        menuActive = false;
     }
 
     // Update is called once per frame
@@ -68,6 +73,20 @@ public class PlayerMovement : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.E) ) {
                 hittingObj.DefendKid();
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if(!menuActive)
+                {
+                    menuActive = true;
+                    gameMenu.SetActive(true);
+                }
+                else
+                {
+                    menuActive = false;
+                    gameMenu.SetActive(false);
+                }
+
             }
 
             horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -149,6 +168,7 @@ public class PlayerMovement : MonoBehaviour
             
         }
 
+       
         //limit of map -> should be walls
         /*if (transform.position.x < -xRange) {
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);

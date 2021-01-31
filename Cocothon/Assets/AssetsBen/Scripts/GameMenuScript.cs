@@ -39,6 +39,7 @@ public class GameMenuScript : MonoBehaviour
     public void resumeGame()
     {
         menu.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void quitGame()
