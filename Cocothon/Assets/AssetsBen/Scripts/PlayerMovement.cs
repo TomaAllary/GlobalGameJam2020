@@ -60,7 +60,8 @@ public class PlayerMovement : MonoBehaviour
         if (gameObject.name == "Karen")
         {
 
-            if (Input.GetKeyDown(KeyCode.Space) && !cantAttack) {                         
+            if (Input.GetKeyDown(KeyCode.Space) && !cantAttack) {
+                animator.SetTrigger("hit");
                 hittingObj.Attack();
                 cantAttack = true;
                 attackCooldown = 0.50f;
