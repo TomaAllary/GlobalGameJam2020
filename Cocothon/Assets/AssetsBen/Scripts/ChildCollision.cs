@@ -57,8 +57,12 @@ public class ChildCollision : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.GetInstanceID() == gameObject.GetComponent<ChildMovement>().parent.GetInstanceID())
+        if (collision.gameObject.GetInstanceID() == gameObject.GetComponent<ChildMovement>().parent.GetInstanceID() && gameObject.GetComponent<ChildMovement>().returningToParent == true)
+        {
             gameObject.GetComponent<ChildMovement>().returningToParent = false;
+            gameObject.GetComponent<ChildMovement>().resetDirection();
+            //gameObject.GetComponent<ChildMovement>().current = gameObject.GetComponent<ChildMovement>().paces;
+        }
 
         if (collision.gameObject.CompareTag("Egg")) {
             if (collision.gameObject.GetComponent<EggCollectable>().isPickable()) {

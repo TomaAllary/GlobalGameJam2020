@@ -9,8 +9,8 @@ public class ChildMovement : MonoBehaviour
     public float zRange = 100.00f;
     public int paces;
 
-    private int current;
-    private int direction;
+    public int current;
+    public int direction;
 
     public bool returningToParent;
     public Rigidbody rb;
@@ -37,8 +37,9 @@ public class ChildMovement : MonoBehaviour
 
         if (!returningToParent)
         {
+
             transform.Translate(transform.forward * Time.deltaTime * speed);
-            current++;
+            
 
 
             if (current == paces)
@@ -50,6 +51,7 @@ public class ChildMovement : MonoBehaviour
                 transform.Rotate(new Vector3(0, direction, 0));
             }
 
+            current++;
 
             if (transform.position.x < -xRange)
             {
@@ -104,5 +106,9 @@ public class ChildMovement : MonoBehaviour
         return closestKaren;
     }
 
+    public void resetDirection()
+    {
+        current = paces;
+    }
    
 }
