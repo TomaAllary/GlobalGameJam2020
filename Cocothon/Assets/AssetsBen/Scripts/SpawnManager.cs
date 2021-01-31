@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UI;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -14,11 +16,12 @@ public class SpawnManager : MonoBehaviour
     public GameObject timmy;
     public GameObject karen;
     public GameObject wildKaren;
+ 
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < 3000; i++)
+        for (int i = 0; i < 600; i++)
         {
             Vector3 spawnPos = new Vector3(Random.Range(spawnRangeX.x, spawnRangeX.y), 40, Random.Range(spawnRangeZ.x, spawnRangeZ.y));
             Instantiate(egg);
@@ -44,6 +47,6 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+    
     }
 }
