@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (horizontalInput != 0 || verticalInput != 0)
             {
-                //karenAnim.SetBool("isRunning", true);
+                animator.SetBool("isRunning", true);
 
                 direction = (horizontalInput * Vector3.right + verticalInput * Vector3.forward).normalized;
                 transform.LookAt(transform.position + direction);
@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.MovePosition(transform.position + direction * Time.fixedDeltaTime * speed);
             }
             else {
-                //karenAnim.SetBool("isRunning", false);
+                animator.SetBool("isRunning", false);
             }
 
 
