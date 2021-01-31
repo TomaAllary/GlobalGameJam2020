@@ -79,9 +79,12 @@ public class PlayerMovement : MonoBehaviour
                 attackCooldown = 0.50f;
             }
             if (Input.GetKeyDown(KeyCode.E) ) {
-                hittingObj.DefendKid();
+                if (Langue.CanShout)
+                {
+                    hittingObj.DefendKid();
 
-                animator.SetTrigger("defend");
+                    animator.SetTrigger("defend");
+                }
             }
             if (Input.GetKeyDown(KeyCode.Escape))
             {

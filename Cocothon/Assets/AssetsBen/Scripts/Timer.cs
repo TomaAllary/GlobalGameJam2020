@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Timer : MonoBehaviour
     public float timeRemainig = 120;
     public bool timerIsRunning = false;
     public TextMeshProUGUI timer;
+    public GameObject eggCounter;
     void Start()
     {
         timerIsRunning = true;
@@ -30,6 +32,8 @@ public class Timer : MonoBehaviour
                 timeRemainig = 0;
                 timerIsRunning = false;
                 DisplayTimer();
+                Langue.EggsTotal = eggCounter.gameObject.GetComponent<TimmyCollision>().eggsInStock;
+                SceneManager.LoadScene(4);
             }
         }
     }

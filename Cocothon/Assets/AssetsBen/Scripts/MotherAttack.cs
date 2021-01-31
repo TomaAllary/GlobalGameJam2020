@@ -15,7 +15,9 @@ public class MotherAttack : MonoBehaviour
     private bool isAttacking;
     private float attackTimer;
     private float voiceTimer;
+    private float shoutTimer;
     private bool canVoice;
+    private bool canShout;
 
     public AudioSource karenSound;
     public AudioClip[] shoutFr;
@@ -32,6 +34,7 @@ public class MotherAttack : MonoBehaviour
         attackTimer = 0;
         voiceTimer = 0;
         canVoice = true;
+        canShout = true;
     }
 
     // Update is called once per frame
@@ -62,6 +65,15 @@ public class MotherAttack : MonoBehaviour
         {
             voiceTimer = 0;
             canVoice = true;
+        }
+        if(shoutTimer > 0)
+        {
+            shoutTimer -= Time.deltaTime;
+        }
+        else if(!Langue.CanShout)
+        {
+            shoutTimer = 0;
+            Langue.CanShout = true;
         }
        
            
@@ -97,21 +109,39 @@ public class MotherAttack : MonoBehaviour
 
     public void DefendKid() {
 
-        defendVFX.Play();
+        
+            defendVFX.Play();
 
 
-        Collider[] ennemies = Physics.OverlapSphere(transform.position, defendRange, LayerMask.GetMask("Child") | LayerMask.GetMask("Mother"));
-
-        foreach(Collider collider in ennemies) {
-            Rigidbody rb = collider.attachedRigidbody;
-
-            if (rb) {
-                Vector3 defendForce = (screamForce / (rb.transform.position - transform.position).magnitude) * (rb.transform.position - transform.position);
-                defendForce.y = 0;
-                rb.AddForce(defendForce, ForceMode.Impulse);
+            Collider[] ennemies = Physics.OverlapSphere(transform.position, defendRange, LayerMask.GetMask("Child") | LayerMask.GetMask("Mother"));
+            if (Langue.LangueSelectionnee == "Francais")
+            {
+                int rando = Random.Range(0, 7);
+                karenSound.PlayOneShot(shoutFr[rando]);
             }
-            if (collider.gameObject.CompareTag("Mother"))
-                collider.gameObject.GetComponent<MotherMovement>().isScared();
-        }
+            else
+            {
+                int rando = Random.Range(0, 5);
+                karenSound.PlayOneShot(shoutEn[rando]);
+            }
+            foreach (Collider collider in ennemies)
+            {
+                Rigidbody rb = collider.attachedRigidbody;
+
+                if (rb)
+                {
+                    Vector3 defendForce = (screamForce / (rb.transform.position - transform.position).magnitude) * (rb.transform.position - transform.position);
+                    defendForce.y = 0;
+                    rb.AddForce(defendForce, ForceMode.Impulse);
+
+
+                }
+                if (collider.gameObject.CompareTag("Mother"))
+                    collider.gameObject.GetComponent<MotherMovement>().isScared();
+            }
+            shoutTimer = 5.0f;
+        Langue.CanShout = false;
+
+        
     }
 }

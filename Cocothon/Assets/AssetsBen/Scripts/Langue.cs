@@ -6,6 +6,8 @@ public static class Langue
 {
     private static string langueSelectionnee = "English";
     private static bool gameMenuOn = false;
+    private static bool canShout = true;
+    private static int eggsTotal = 0;
 
     public static string LangueSelectionnee
     {
@@ -30,5 +32,26 @@ public static class Langue
             GameMenuOn = value;
         }
     }
-
+    public static bool CanShout
+    {
+        get
+        {
+            return canShout;
+        }
+        set
+        {
+            canShout = value;
+        }
+    }
+    public static int EggsTotal
+    {
+        get
+        {
+            return eggsTotal;
+        }
+        set
+        {
+            eggsTotal = value;
+        }
+    }
 }
