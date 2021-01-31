@@ -10,9 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 20.00f;
     public float xRange = 100.00f;
     public float zRange = 100.00f;
-
-    public bool isActive;
-    public bool timmyReadyForLaunch;
+    public Animator animator;
 
     public MotherAttack hittingObj;
 
@@ -33,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
 
         rb = this.GetComponent<Rigidbody>();
 
-        timmyReadyForLaunch = true;
         cantAttack = false;
         attackCooldown = 0;
     }
@@ -41,13 +38,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
 
-        if((timmy.transform.position - karen.transform.position).magnitude < 2.5f) {
-            timmyReadyForLaunch = true;
-        }
-        else {
-            timmyReadyForLaunch = false;
-        }
         if (cantAttack)
         {
             if (attackCooldown > 0)
@@ -82,10 +74,15 @@ public class PlayerMovement : MonoBehaviour
 
             if (horizontalInput != 0 || verticalInput != 0)
             {
+                animator.SetBool("isRunning", true);
+
                 direction = (horizontalInput * Vector3.right + verticalInput * Vector3.forward).normalized;
                 transform.LookAt(transform.position + direction);
 
                 rb.MovePosition(transform.position + direction * Time.fixedDeltaTime * speed);
+            }
+            else {
+                animator.SetBool("isRunning", false);
             }
 
 
@@ -113,13 +110,25 @@ public class PlayerMovement : MonoBehaviour
 
                 }
 
+                if (rb.velocity.x != 0 || rb.velocity.z != 0) {
+                    animator.SetBool("isRunning", true);
+                }
+                else {
+                    animator.SetBool("isRunning", false);
+                }
+
 
 
 
             }
             else {
                 //Timmy control itself
-                if ((karen.transform.position - transform.position).magnitude > 2) {
+                if ((karen.transform.position - transform.position).magnitude > 3) {
+
+                    animator.SetBool("isRunning", true);
+                    
+                    
+
                     Vector3 diff = karen.transform.position - transform.position;
                     //ignore y diff
                     diff.y = 0;
@@ -127,10 +136,13 @@ public class PlayerMovement : MonoBehaviour
 
                     transform.LookAt(transform.position + diff);
 
-                    if ((karen.transform.position - transform.position).magnitude > 4)
+                    if ((karen.transform.position - transform.position).magnitude > 4.5f)
                         rb.velocity = diff * speed;
                     else
                         rb.velocity = diff * karen.GetComponent<PlayerMovement>().speed;
+                }
+                else {
+                    animator.SetBool("isRunning", false);
                 }
             }
 
@@ -153,10 +165,6 @@ public class PlayerMovement : MonoBehaviour
         if (transform.position.z > zRange) {
             transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
         }
-    }
-    public void activeToggle()
-    {
-        isActive = !isActive;
     }
 
 

@@ -4,10 +4,9 @@ using TMPro;
 using UnityEngine;
 
 
-public class TimmyCollision : MonoBehaviour
-{
+public class TimmyCollision : MonoBehaviour {
 
-    
+
     public TextMeshProUGUI scoreText;
     public int eggsInStock;
 
@@ -22,48 +21,43 @@ public class TimmyCollision : MonoBehaviour
     public GameObject egg;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         eggsInStock = 0;
         stunt = false;
         stuntTimer = 0;
-        egg = GameObject.FindGameObjectWithTag("Egg");
+        xDropRange = 1f;
+        zDropRange = 1f;
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         starsFX.SetActive(stunt);
 
-        if (stunt)
-        {
+        if (stunt) {
             starsFX.transform.Rotate(0, Time.deltaTime * 350, 0, Space.Self);
 
             if (stuntTimer > 0)
                 stuntTimer -= Time.deltaTime;
-            else
-            {
+            else {
                 stuntTimer = 0;
                 stunt = false;
             }
         }
     }
 
-   /* private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Egg"))
-        {
-    
-            eggsInStock++;
-            scoreText.text = "Oeufs: " + eggsInStock;
-            Destroy(other.gameObject);
-        }
-    }*/
+    /* private void OnTriggerEnter(Collider other)
+     {
+         if (other.CompareTag("Egg"))
+         {
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Egg"))
-        {
+             eggsInStock++;
+             scoreText.text = "Oeufs: " + eggsInStock;
+             Destroy(other.gameObject);
+         }
+     }*/
+
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.CompareTag("Egg")) {
             if (collision.gameObject.GetComponent<EggCollectable>().isPickable()) {
                 eggsInStock++;
                 scoreText.text = "Oeufs: " + eggsInStock;
@@ -72,40 +66,31 @@ public class TimmyCollision : MonoBehaviour
         }
     }
 
-    public void TakeDamage()
-    {
-        if (!stunt)
-        {
-            if (eggsInStock < 3)
-            {
+    public void TakeDamage() {
+        if (!stunt) {
+            if (eggsInStock < 3) {
                 DropEggs(eggsInStock);
                 eggsInStock = 0;
             }
-            else
-            {
+            else {
                 eggsInStock -= 3;
                 DropEggs(3);
             }
 
-            
+
             stunt = true;
             stuntTimer = 3;
         }
     }
 
-    private void DropEggs(int nb)
-    {
-        for (int i = 0; i < nb; i++)
-        {
+    private void DropEggs(int nb) {
+        for (int i = 0; i < nb; i++) {
             float x = Random.Range(-xDropRange, xDropRange);
             float z = Random.Range(-zDropRange, zDropRange);
 
             Vector3 spawnPos = new Vector3(x, 0, z);
             GameObject egg1 = Instantiate(egg);
             egg1.transform.position = transform.position + spawnPos;
-
-            Debug.Log("Egg spawned");
-
         }
     }
 }
