@@ -73,6 +73,8 @@ public class PlayerMovement : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.E) ) {
                 hittingObj.DefendKid();
+
+                animator.SetTrigger("defend");
             }
             if (Input.GetKeyDown(KeyCode.Escape))
             {
