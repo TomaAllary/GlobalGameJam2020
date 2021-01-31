@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && !cantAttack) {                         
                 hittingObj.Attack();
                 cantAttack = true;
-                attackCooldown = 1.50f;
+                attackCooldown = 0.50f;
             }
             if (Input.GetKeyDown(KeyCode.E) ) {
                 hittingObj.DefendKid();

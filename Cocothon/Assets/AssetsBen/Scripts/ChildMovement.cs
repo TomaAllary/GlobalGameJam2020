@@ -38,7 +38,7 @@ public class ChildMovement : MonoBehaviour
         if (!returningToParent)
         {
 
-            transform.Translate(transform.forward * Time.deltaTime * speed);
+            
             
 
 
@@ -50,7 +50,8 @@ public class ChildMovement : MonoBehaviour
 
                 transform.Rotate(new Vector3(0, direction, 0));
             }
-
+            rb.velocity = transform.forward * speed;
+            //transform.Translate(transform.forward * Time.deltaTime * speed);
             current++;
 
             if (transform.position.x < -xRange)

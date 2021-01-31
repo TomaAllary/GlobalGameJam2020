@@ -71,6 +71,8 @@ public class MotherAttack : MonoBehaviour
                 defendForce.y = 0;
                 rb.AddForce(defendForce, ForceMode.Impulse);
             }
+            if (collider.gameObject.CompareTag("Mother"))
+                collider.gameObject.GetComponent<MotherMovement>().isScared();
         }
     }
 }

@@ -245,4 +245,12 @@ public class MotherMovement : MonoBehaviour
                 target.GetComponent<TimmyCollision>().TakeDamage();
         }
     }
+
+    public void isScared()
+    {
+        lockingTimer = 0;
+        isLocked = false;
+        aggroOff = true;
+        aggroCooldownTimer = 5;
+    }
 }
