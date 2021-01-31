@@ -507,7 +507,7 @@ PrefabInstance:
     - target: {fileID: 113798238137961501, guid: 2fb3527590edb9748bec382cebc7ff0d,
         type: 3}
       propertyPath: m_Name
-      value: English Tuto
+      value: 'English '
       objectReference: {fileID: 0}
     - target: {fileID: 113798238137961506, guid: 2fb3527590edb9748bec382cebc7ff0d,
         type: 3}
@@ -622,9 +622,9 @@ PrefabInstance:
     - target: {fileID: 113798238137961507, guid: 2fb3527590edb9748bec382cebc7ff0d,
         type: 3}
       propertyPath: m_Text
-      value: "Malicious Goats\nGGJ 2021\n\nArtists: \nCamille\nGab\nMatis\nSarah-Fr\xE9d\xE9rique\n\nSound
-        Designer:\nChryssie\n\nProgrammers\nToma Allary\nVincent Boucher\nBenoit
-        Matteau"
+      value: "Malicious Goats\nGGJ 2021\n\nArtists: \nCamille Boivin\nGabriel Thibault\r\nMatis
+        Grenier\r\nSarah-Fr\xE9d\xE9rique Schetagne\n\nSound Designer and music:\nChryssie
+        Gagn\xE9\n\nProgrammers\nToma Allary\nVincent Boucher\nBenoit Matteau"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fb3527590edb9748bec382cebc7ff0d, type: 3}
@@ -1089,7 +1089,7 @@ PrefabInstance:
     - target: {fileID: 113798238137961501, guid: 2fb3527590edb9748bec382cebc7ff0d,
         type: 3}
       propertyPath: m_Name
-      value: Francais Tuto
+      value: 'Francais '
       objectReference: {fileID: 0}
     - target: {fileID: 113798238137961506, guid: 2fb3527590edb9748bec382cebc7ff0d,
         type: 3}
@@ -1204,9 +1204,9 @@ PrefabInstance:
     - target: {fileID: 113798238137961507, guid: 2fb3527590edb9748bec382cebc7ff0d,
         type: 3}
       propertyPath: m_Text
-      value: "Malicious Goats\nGGJ 2021\n\nArtistes: \nCamille\nGab\nMatis\nSarah-Fr\xE9d\xE9rique\n\nSound
-        Designer:\nChryssie\n\nProgrammeurs\nToma Allary\nVincent Boucher\nBenoit
-        Matteau"
+      value: "Malicious Goats\nGGJ 2021\n\nArtistes: \nCamille Boivin\nGabriel Thibault\nMatis
+        Grenier\nSarah-Fr\xE9d\xE9rique Schetagne\n\nConception Sonore et Musique\nChryssie
+        Gagn\xE9\n\nProgrammeurs\nToma Allary\nVincent Boucher\nBenoit Matteau"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fb3527590edb9748bec382cebc7ff0d, type: 3}
