@@ -95,7 +95,7 @@ public class ChildCollision : MonoBehaviour {
             float x = Random.Range(-xDropRange, xDropRange);
             float z = Random.Range(-zDropRange, zDropRange);
 
-            Vector3 spawnPos = new Vector3(x, 1.5f, z);
+            Vector3 spawnPos = new Vector3(x, transform.position.y + 1.5f, z);
             GameObject egg1 = Instantiate(egg);
             egg1.transform.position = transform.position + spawnPos;
 

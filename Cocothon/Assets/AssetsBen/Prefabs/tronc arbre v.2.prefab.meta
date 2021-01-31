@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Cocothon/Assets/Audio.meta
+guid: f4eab66d19690a24c9ff855aa9a56f6a
+folderAsset: yes
+DefaultImporter:
+=======
 guid: 99c7ae61a2c68b748bcd11d13ec9d1e3
 PrefabImporter:
+>>>>>>> d6dd3b5b2a40945e3e948e0b04a817c2cc9a0ff3:Cocothon/Assets/AssetsBen/Prefabs/tronc arbre v.2.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

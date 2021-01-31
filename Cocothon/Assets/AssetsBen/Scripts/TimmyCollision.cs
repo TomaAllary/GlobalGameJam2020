@@ -88,7 +88,7 @@ public class TimmyCollision : MonoBehaviour {
             float x = Random.Range(-xDropRange, xDropRange);
             float z = Random.Range(-zDropRange, zDropRange);
 
-            Vector3 spawnPos = new Vector3(x, 0, z);
+            Vector3 spawnPos = new Vector3(x, 40, z);
             GameObject egg1 = Instantiate(egg);
             egg1.transform.position = transform.position + spawnPos;
         }

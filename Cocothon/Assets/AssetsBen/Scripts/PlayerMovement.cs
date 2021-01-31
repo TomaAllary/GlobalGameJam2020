@@ -60,10 +60,11 @@ public class PlayerMovement : MonoBehaviour
         if (gameObject.name == "Karen")
         {
 
-            if (Input.GetKeyDown(KeyCode.Space) && !cantAttack) {                         
+            if (Input.GetKeyDown(KeyCode.Space) && !cantAttack) {
+                animator.SetTrigger("hit");
                 hittingObj.Attack();
                 cantAttack = true;
-                attackCooldown = 1.50f;
+                attackCooldown = 0.50f;
             }
             if (Input.GetKeyDown(KeyCode.E) ) {
                 hittingObj.DefendKid();
@@ -150,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //limit of map -> should be walls
-        if (transform.position.x < -xRange) {
+        /*if (transform.position.x < -xRange) {
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
         }
 
@@ -164,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (transform.position.z > zRange) {
             transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
-        }
+        }*/
     }
 
 

@@ -54,7 +54,7 @@ public class MotherAttack : MonoBehaviour
 
     public void Attack() {
         isAttacking = true;
-        attackTimer = 0.50f;
+        attackTimer = 0.63f;
     }
 
     public void DefendKid() {
@@ -71,6 +71,8 @@ public class MotherAttack : MonoBehaviour
                 defendForce.y = 0;
                 rb.AddForce(defendForce, ForceMode.Impulse);
             }
+            if (collider.gameObject.CompareTag("Mother"))
+                collider.gameObject.GetComponent<MotherMovement>().isScared();
         }
     }
 }

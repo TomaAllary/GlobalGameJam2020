@@ -12,7 +12,9 @@ public class MotherMovement : MonoBehaviour
     private int direction;
 
     public GameObject[] children; 
-    public GameObject timmy; 
+    public GameObject timmy;
+
+    public Animator animator;
 
     private Rigidbody rb;
 
@@ -78,11 +80,13 @@ public class MotherMovement : MonoBehaviour
     {
 
 
-        transform.Translate(transform.forward * Time.deltaTime * speed);
-        current++;
+        
 
         if (!isLocked)
         {
+            transform.Translate(transform.forward * Time.deltaTime * speed);
+            current++;
+
             hitColliders = Physics.OverlapSphere(transform.position, 30);
             float distance = Mathf.Infinity;
             GameObject closest = null;
@@ -167,7 +171,7 @@ public class MotherMovement : MonoBehaviour
             }
         }
 
-        if (transform.position.x < -xRange)
+        /*if (transform.position.x < -xRange)
         {
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
             transform.Rotate(new Vector3(0, 180, 0));
@@ -189,7 +193,7 @@ public class MotherMovement : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
             transform.Rotate(new Vector3(0, 180, 0));
-        }
+        }*/
 
         if (isLocked)
         {
@@ -226,7 +230,7 @@ public class MotherMovement : MonoBehaviour
     {
         isLocked = true;
         target = obj;
-        lockingTimer = 15;
+        lockingTimer = 15.0f;
     }
 
 
@@ -239,10 +243,19 @@ public class MotherMovement : MonoBehaviour
     {
         if (isAggressive && !aggroOff && collision.gameObject.GetInstanceID() == target.gameObject.GetInstanceID())
         {
+            animator.SetTrigger("hit");
             if (collision.gameObject.CompareTag("Child"))
                 target.GetComponent<ChildCollision>().TakeDamage();
             else if(collision.gameObject.CompareTag("Timmy"))
                 target.GetComponent<TimmyCollision>().TakeDamage();
         }
+    }
+
+    public void isScared()
+    {
+        lockingTimer = 0;
+        isLocked = false;
+        aggroOff = true;
+        aggroCooldownTimer = 5;
     }
 }

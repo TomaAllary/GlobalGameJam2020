@@ -46,7 +46,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6643670883992372103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 96.53934, y: 1, z: 46.24562}
+  m_LocalPosition: {x: 46.59505, y: 40, z: 18.92015}
   m_LocalScale: {x: 0.5, y: 0.8, z: 0.5}
   m_Children:
   - {fileID: 543450652030442827}
@@ -86,6 +86,7 @@ MonoBehaviour:
   paces: 0
   children: []
   timmy: {fileID: 0}
+  animator: {fileID: 666288562}
   isLocked: 0
   target: {fileID: 0}
   isAggressive: 0
