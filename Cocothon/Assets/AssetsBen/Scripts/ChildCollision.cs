@@ -81,7 +81,7 @@ public class ChildCollision : MonoBehaviour
     {
         if (!stunt)
         {
-            print("ayoye tbk!!");
+            
             if (eggsInStock < 3)
             {
                 DropEggs(eggsInStock);
@@ -108,7 +108,6 @@ public class ChildCollision : MonoBehaviour
             GameObject egg1 = Instantiate(egg);
             egg1.transform.position = transform.position + spawnPos;
 
-            Debug.Log("Egg spawned");
 
         }
     }

@@ -237,10 +237,12 @@ public class MotherMovement : MonoBehaviour
      * **/
     private void OnCollisionEnter(Collision collision)
     {
-        if (isAggressive && !aggroOff && collision.gameObject == target)
+        if (isAggressive && !aggroOff && collision.gameObject.GetInstanceID() == target.gameObject.GetInstanceID())
+        {
             if (collision.gameObject.CompareTag("Child"))
                 target.GetComponent<ChildCollision>().TakeDamage();
             else
                 target.GetComponent<TimmyCollision>().TakeDamage();
+        }
     }
 }
