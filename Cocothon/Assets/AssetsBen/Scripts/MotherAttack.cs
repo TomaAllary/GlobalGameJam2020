@@ -5,10 +5,13 @@ using UnityEngine;
 public class MotherAttack : MonoBehaviour
 {
 
-    public float defendRange = 10.0f;
+    public float defendRange = 2.6f;
+    public ParticleSystem defendVFX;
+    public float screamForce = 5f;
+    public Renderer handbagMat;
+
+
     private bool isAttacking;
-
-
     private float attackTimer;
   
     
@@ -25,7 +28,7 @@ public class MotherAttack : MonoBehaviour
     void Update()
     {
         if (isAttacking) {
-            gameObject.GetComponent<Renderer>().material.color = Color.red;
+            handbagMat.material.color = Color.red;
             if(attackTimer > 0)
             {
                 attackTimer -= Time.deltaTime;
@@ -38,7 +41,7 @@ public class MotherAttack : MonoBehaviour
         }
         else 
         {
-            gameObject.GetComponent<Renderer>().material.color = Color.white;
+            handbagMat.material.color = new Color(173, 0, 156);
            
         }
     }
@@ -55,13 +58,16 @@ public class MotherAttack : MonoBehaviour
     }
 
     public void DefendKid() {
+
+        defendVFX.Play();
+
         Collider[] ennemies = Physics.OverlapSphere(transform.position, defendRange, LayerMask.GetMask("Child") | LayerMask.GetMask("Mother"));
 
         foreach(Collider collider in ennemies) {
             Rigidbody rb = collider.attachedRigidbody;
 
             if (rb) {
-                Vector3 defendForce = rb.transform.position - transform.position;
+                Vector3 defendForce = (screamForce / (rb.transform.position - transform.position).magnitude) * (rb.transform.position - transform.position);
                 defendForce.y = 0;
                 rb.AddForce(defendForce, ForceMode.Impulse);
             }

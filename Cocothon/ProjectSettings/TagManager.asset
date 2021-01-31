@@ -8,6 +8,7 @@ TagManager:
   - Child
   - Mother
   - Timmy
+  - Karen
   layers:
   - Default
   - TransparentFX
@@ -19,10 +20,10 @@ TagManager:
   - 
   - Terrain
   - Timmy
-  - 
-  - 
-  - 
-  - 
+  - Child
+  - Egg
+  - Mother
+  - Karen
   - 
   - 
   - 

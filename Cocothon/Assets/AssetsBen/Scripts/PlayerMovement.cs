@@ -10,15 +10,12 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 20.00f;
     public float xRange = 100.00f;
     public float zRange = 100.00f;
+    public Animator animator;
 
-    public bool isActive;
-    public bool timmyReadyForLaunch;
-
-    public GameObject hittingObj;
+    public MotherAttack hittingObj;
 
     private GameObject timmy;
     private GameObject karen;
-    private Camera cam;
 
     private Vector3 direction;
     private Rigidbody rb;
@@ -29,13 +26,11 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         timmy = GameObject.Find("Timmy");
         karen = GameObject.Find("Karen");
-        hittingObj = GameObject.Find("Saccoche");
+
         rb = this.GetComponent<Rigidbody>();
 
-        timmyReadyForLaunch = true;
         cantAttack = false;
         attackCooldown = 0;
     }
@@ -43,13 +38,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
 
-        if((timmy.transform.position - karen.transform.position).magnitude < 6) {
-            timmyReadyForLaunch = true;
-        }
-        else {
-            timmyReadyForLaunch = false;
-        }
         if (cantAttack)
         {
             if (attackCooldown > 0)
@@ -67,84 +57,114 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isActive)
+        if (gameObject.name == "Karen")
         {
 
-            if (Input.GetKeyDown(KeyCode.Space) && gameObject.name == "Karen" && !cantAttack) {                         
-                hittingObj.GetComponent<MotherAttack>().Attack();
+            if (Input.GetKeyDown(KeyCode.Space) && !cantAttack) {                         
+                hittingObj.Attack();
                 cantAttack = true;
                 attackCooldown = 1.50f;
             }
-            if (Input.GetKeyDown(KeyCode.E) && gameObject.name == "Karen") {
-                hittingObj.GetComponent<MotherAttack>().DefendKid();
+            if (Input.GetKeyDown(KeyCode.E) ) {
+                hittingObj.DefendKid();
             }
-
-            Vector3 oldPos = transform.position;
 
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");
 
             if (horizontalInput != 0 || verticalInput != 0)
             {
+                animator.SetBool("isRunning", true);
+
                 direction = (horizontalInput * Vector3.right + verticalInput * Vector3.forward).normalized;
                 transform.LookAt(transform.position + direction);
 
+                rb.MovePosition(transform.position + direction * Time.fixedDeltaTime * speed);
+            }
+            else {
+                animator.SetBool("isRunning", false);
+            }
 
-                //Bound timmy to camera view range
-                bool TimmyCanGo = true;
-                if (gameObject.name == "Timmy")
-                {
-                    Vector3 viewPos = cam.WorldToViewportPoint(transform.position + direction * Time.fixedDeltaTime * speed);
 
-                    if (viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1)
-                    {
-                        TimmyCanGo = false;
-                    }
+
+
+
+        }
+
+        else if (gameObject.name == "Timmy")
+        {
+
+            //Control timmy
+            if (Input.GetKey(KeyCode.Mouse1)) {
+                Camera cam = Camera.main;
+
+                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if(Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
+
+                    Vector3 destination = new Vector3(hit.point.x, timmy.transform.position.y, hit.point.z);
+
+                    timmy.transform.LookAt(destination);
+                    rb.velocity =  (destination - transform.position).normalized * speed;
 
                 }
-                if (TimmyCanGo)
-                    rb.MovePosition(transform.position + direction * Time.fixedDeltaTime * speed);
+
+                if (rb.velocity.x != 0 || rb.velocity.z != 0) {
+                    animator.SetBool("isRunning", true);
+                }
+                else {
+                    animator.SetBool("isRunning", false);
+                }
+
+
+
+
+            }
+            else {
+                //Timmy control itself
+                if ((karen.transform.position - transform.position).magnitude > 3) {
+
+                    animator.SetBool("isRunning", true);
+                    
+                    
+
+                    Vector3 diff = karen.transform.position - transform.position;
+                    //ignore y diff
+                    diff.y = 0;
+                    diff.Normalize();
+
+                    transform.LookAt(transform.position + diff);
+
+                    if ((karen.transform.position - transform.position).magnitude > 4.5f)
+                        rb.velocity = diff * speed;
+                    else
+                        rb.velocity = diff * karen.GetComponent<PlayerMovement>().speed;
+                }
+                else {
+                    animator.SetBool("isRunning", false);
+                }
             }
 
-
-
-
-            //limit of map -> should be walls
-            if (transform.position.x < -xRange)
-            {
-                transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
-            }
-
-            if (transform.position.x > xRange)
-            {
-                transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
-            }
-
-            if (transform.position.z < -zRange)
-            {
-                transform.position = new Vector3(transform.position.x, transform.position.y, -zRange);
-            }
-
-            if (transform.position.z > zRange)
-            {
-                transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
-            }
+            
         }
 
-        else if (gameObject.name == "Timmy" && ((karen.transform.position - transform.position).magnitude > 5))
-        {
-            Vector3 diff = karen.transform.position - transform.position;
-            //ignore y diff
-            diff.y = 0;
-            diff.Normalize();
-
-            transform.LookAt(transform.position + diff);
-            rb.MovePosition(transform.position + diff * Time.fixedDeltaTime * speed);
+        //limit of map -> should be walls
+        if (transform.position.x < -xRange) {
+            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
         }
-    }
-    public void activeToggle()
-    {
-        isActive = !isActive;
+
+        if (transform.position.x > xRange) {
+            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.z < -zRange) {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -zRange);
+        }
+
+        if (transform.position.z > zRange) {
+            transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
+        }
     }
 
 
