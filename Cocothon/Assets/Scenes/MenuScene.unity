@@ -674,7 +674,7 @@ PrefabInstance:
     - target: {fileID: 3439712775640675568, guid: aa77e07e1977b7c43820f14a1292d1b8,
         type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 18
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3439712775640675568, guid: aa77e07e1977b7c43820f14a1292d1b8,
         type: 3}
@@ -685,6 +685,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FontData.m_FontStyle
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439712775640675583, guid: aa77e07e1977b7c43820f14a1292d1b8,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439712775640675583, guid: aa77e07e1977b7c43820f14a1292d1b8,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 3439712776745618904, guid: aa77e07e1977b7c43820f14a1292d1b8,
         type: 3}
@@ -709,32 +719,32 @@ PrefabInstance:
     - target: {fileID: 3439712776745618905, guid: aa77e07e1977b7c43820f14a1292d1b8,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3439712776745618905, guid: aa77e07e1977b7c43820f14a1292d1b8,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3439712776745618905, guid: aa77e07e1977b7c43820f14a1292d1b8,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3439712776745618905, guid: aa77e07e1977b7c43820f14a1292d1b8,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3439712776745618905, guid: aa77e07e1977b7c43820f14a1292d1b8,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 60
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3439712776745618905, guid: aa77e07e1977b7c43820f14a1292d1b8,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 15
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 3439712776745618905, guid: aa77e07e1977b7c43820f14a1292d1b8,
         type: 3}
@@ -774,12 +784,12 @@ PrefabInstance:
     - target: {fileID: 3439712776745618905, guid: aa77e07e1977b7c43820f14a1292d1b8,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 430
+      value: 365
       objectReference: {fileID: 0}
     - target: {fileID: 3439712776745618905, guid: aa77e07e1977b7c43820f14a1292d1b8,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -237
+      value: 179
       objectReference: {fileID: 0}
     - target: {fileID: 3439712776745618905, guid: aa77e07e1977b7c43820f14a1292d1b8,
         type: 3}
@@ -1719,8 +1729,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c5dce08a3c08d47ad18fc37a370897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioFr: {fileID: 8300000, guid: c09805195983cbd4eb6a749bd8327b53, type: 3}
-  audioEn: {fileID: 8300000, guid: 1584acf2ff227d04cbcb6d7566870332, type: 3}
+  audioFr: {fileID: 8300000, guid: 9eb915c4cf9d76449b886cdbca919aa0, type: 3}
+  audioEn: {fileID: 8300000, guid: 8cf93b45c1ad9564fa8f1a2fb6b98e85, type: 3}
   audioSource: {fileID: 291872497}
   audioSourceFond: {fileID: 1009973095}
   bouttonJouer: {fileID: 1413155475}
